@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="DentalClinicMobile.AppointmentPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             BackgroundColor="#F5F6FA"
+             Title="Запись на прием">
+
+    <ContentPage.Resources>
+        <Style x:Key="AppointmentButtonStyle" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="#C9DEFF"/>
+            <Setter Property="TextColor" Value="#244484"/>
+            <Setter Property="Padding" Value="26,8"/>
+            <Setter Property="WidthRequest" Value="320"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="CornerRadius" Value="10"/>
+        </Style>
+
+        <Style x:Key="SelectionCardStyle" TargetType="Border">
+            <Setter Property="BackgroundColor" Value="#FFFFFF"/>
+            <Setter Property="StrokeShape" Value="RoundRectangle 12"/>
+            <Setter Property="Stroke" Value="#E1E8FF"/>
+            <Setter Property="StrokeThickness" Value="1"/>
+            <Setter Property="Padding" Value="15"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+        </Style>
+
+        <Style x:Key="SectionStyle" TargetType="Border">
+            <Setter Property="BackgroundColor" Value="#FFFFFF"/>
+            <Setter Property="StrokeShape" Value="RoundRectangle 16"/>
+            <Setter Property="Stroke" Value="#E1E8FF"/>
+            <Setter Property="StrokeThickness" Value="1"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="Margin" Value="0,0,0,20"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="140"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackLayout Grid.Column="0" 
+                     BackgroundColor="#244484"
+                     VerticalOptions="Fill"
+                     HorizontalOptions="Fill">
+
+            <StackLayout Orientation="Horizontal" Margin="18,26,0,16" VerticalOptions="Start">
+                <Label Text="Квио" TextColor="White" FontAttributes="Bold" FontSize="26"/>
+                <Image Source="logo.png" WidthRequest="32" HeightRequest="32" Margin="10,0,0,0"/>
+            </StackLayout>
+            <Label Text="цифровая стоматология" TextColor="White" Margin="18,-20,0,36" FontSize="9"/>
+
+            <StackLayout Margin="18,0,0,0">
+                <StackLayout Orientation="Horizontal" Margin="0,10,0,0" VerticalOptions="Center">
+                    <Image Source="home.png" WidthRequest="20" HeightRequest="20" Margin="0,0,10,0"/>
+                    <Label Text="Главная" TextColor="White" FontSize="16" VerticalOptions="Center"/>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnHomeTapped"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Margin="0,10,0,0" VerticalOptions="Center">
+                    <Image Source="info.png" WidthRequest="20" HeightRequest="20" Margin="0,0,10,0"/>
+                    <Label Text="О клинике" TextColor="White" FontSize="16" VerticalOptions="Center"/>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnAboutTapped"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Margin="0,10,0,0" VerticalOptions="Center">
+                    <Image Source="services.png" WidthRequest="20" HeightRequest="20" Margin="0,0,10,0"/>
+                    <Label Text="Услуги" TextColor="White" FontSize="16" VerticalOptions="Center"/>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnServicesTapped"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Margin="0,10,0,0" VerticalOptions="Center">
+                    <Image Source="price.png" WidthRequest="20" HeightRequest="20" Margin="0,5,10,0"/>
+                    <Label Text="Цены" TextColor="White" FontSize="16" VerticalOptions="Center"/>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnPriceTapped"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Margin="0,10,0,0" VerticalOptions="Center">
+                    <Image Source="user.png" WidthRequest="20" HeightRequest="20" Margin="0,0,10,0"/>
+                    <Label Text="Профиль" TextColor="White" FontSize="16" VerticalOptions="Center"/>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnProfileTapped"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" Margin="18,20,0,20" VerticalOptions="EndAndExpand" Spacing="10">
+                <Image Source="vk.png" WidthRequest="20" HeightRequest="20"/>
+                <Image Source="whatsapp.png" WidthRequest="20" HeightRequest="20"/>
+                <Image Source="tg.png" WidthRequest="20" HeightRequest="20"/>
+            </StackLayout>
+        </StackLayout>
+
+        <ScrollView Grid.Column="1" BackgroundColor="#F5F6FA">
+            <StackLayout Margin="20">
+                <Label Text="Оформление записи на прием" 
+                       FontAttributes="Bold" 
+                       FontSize="28" 
+                       TextColor="#244484" 
+                       Margin="0,0,0,20"/>
+
+                <ActivityIndicator x:Name="LoadingIndicator" 
+                                   IsVisible="False"
+                                   IsRunning="False"
+                                   Color="#467EEA"
+                                   Margin="0,0,0,20"/>
+
+                <StackLayout x:Name="MainContent" IsVisible="True">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackLayout Grid.Column="0">
+                            <Border Style="{StaticResource SectionStyle}">
+                                <VerticalStackLayout>
+                                    <Label Text="Выбор услуги" 
+                                           FontAttributes="Bold" 
+                                           FontSize="18" 
+                                           TextColor="#244484" 
+                                           Margin="0,0,0,15"/>
+                                    <StackLayout x:Name="ServicesStackLayout"/>
+                                </VerticalStackLayout>
+                            </Border>
+
+                            <Border Style="{StaticResource SectionStyle}">
+                                <VerticalStackLayout>
+                                    <Label Text="Выбор врача" 
+                                           FontAttributes="Bold" 
+                                           FontSize="18" 
+                                           TextColor="#244484" 
+                                           Margin="0,0,0,15"/>
+                                    <StackLayout x:Name="DoctorsStackLayout"/>
+                                </VerticalStackLayout>
+                            </Border>
+                        </StackLayout>
+
+                        <StackLayout Grid.Column="2">
+                            <Border Style="{StaticResource SectionStyle}">
+                                <VerticalStackLayout>
+                                    <Label Text="Выбор даты и времени" 
+                                           FontAttributes="Bold" 
+                                           FontSize="18" 
+                                           TextColor="#244484" 
+                                           Margin="0,0,0,15"/>
+
+                                    <VerticalStackLayout Margin="0,0,0,15">
+                                        <Label Text="Дата приема" 
+                                               TextColor="#828CA0" 
+                                               FontSize="12"
+                                               FontAttributes="Bold"
+                                               Margin="0,0,0,5"/>
+                                        <DatePicker x:Name="AppointmentDatePicker"
+                                                    Format="dd.MM.yyyy"/>
+                                    </VerticalStackLayout>
+
+                                    <VerticalStackLayout Margin="0,0,0,20">
+                                        <Label Text="Время приема" 
+                                               TextColor="#828CA0" 
+                                               FontSize="12"
+                                               FontAttributes="Bold"
+                                               Margin="0,0,0,5"/>
+                                        <Picker x:Name="TimePicker" Title="Выберите время">
+                                            <Picker.Items>
+                                                <x:String>09:00</x:String>
+                                                <x:String>10:00</x:String>
+                                                <x:String>11:00</x:String>
+                                                <x:String>12:00</x:String>
+                                                <x:String>14:00</x:String>
+                                                <x:String>15:00</x:String>
+                                                <x:String>16:00</x:String>
+                                                <x:String>17:00</x:String>
+                                            </Picker.Items>
+                                        </Picker>
+                                    </VerticalStackLayout>
+
+                                    <Border BackgroundColor="#F8FBFF" 
+                                            StrokeShape="RoundRectangle 8"
+                                            Stroke="#E1E8FF"
+                                            StrokeThickness="1"
+                                            Padding="12"
+                                            Margin="0,10,0,0">
+                                        <VerticalStackLayout>
+                                            <Label Text="Информация о записи" 
+                                                   FontAttributes="Bold" 
+                                                   FontSize="12" 
+                                                   TextColor="#244484" 
+                                                   Margin="0,0,0,8"/>
+
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Label Grid.Row="0" Grid.Column="0" 
+                                                       Text="Услуга:" 
+                                                       TextColor="#828CA0" 
+                                                       FontSize="11"/>
+                                                <Label x:Name="SelectedServiceText" 
+                                                       Grid.Row="0" Grid.Column="1" 
+                                                       Text="Не выбрана" 
+                                                       FontAttributes="Bold" 
+                                                       FontSize="11" 
+                                                       TextColor="#244484"/>
+
+                                                <Label Grid.Row="1" Grid.Column="0" 
+                                                       Text="Врач:" 
+                                                       TextColor="#828CA0" 
+                                                       FontSize="11"
+                                                       Margin="0,4,0,0"/>
+                                                <Label x:Name="SelectedDoctorText" 
+                                                       Grid.Row="1" Grid.Column="1" 
+                                                       Text="Не выбран" 
+                                                       FontAttributes="Bold" 
+                                                       FontSize="11" 
+                                                       TextColor="#244484"
+                                                       Margin="0,4,0,0"/>
+
+                                                <Label Grid.Row="2" Grid.Column="0" 
+                                                       Text="Стоимость:" 
+                                                       TextColor="#828CA0" 
+                                                       FontSize="11"
+                                                       Margin="0,4,0,0"/>
+                                                <Label x:Name="SelectedPriceText" 
+                                                       Grid.Row="2" Grid.Column="1" 
+                                                       Text="0 ₽" 
+                                                       FontAttributes="Bold" 
+                                                       FontSize="11" 
+                                                       TextColor="#467EEA"
+                                                       Margin="0,4,0,0"/>
+                                            </Grid>
+                                        </VerticalStackLayout>
+                                    </Border>
+                                </VerticalStackLayout>
+                            </Border>
+
+                            <Button Text="Записаться на прием" 
+                                    Style="{StaticResource AppointmentButtonStyle}"
+                                    Margin="0,28,0,0"
+                                    Clicked="OnConfirmAppointmentClicked"/>
+                        </StackLayout>
+                    </Grid>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

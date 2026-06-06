@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="DentalClinicMobile.EditDateDialog"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             BackgroundColor="#80000000">
+
+    <Border BackgroundColor="White" 
+            StrokeShape="RoundRectangle 20"
+            WidthRequest="380"
+            HeightRequest="320"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            Stroke="#E1E8FF"
+            StrokeThickness="1">
+
+        <Grid>
+            <Border BackgroundColor="#244484" 
+                    StrokeShape="RoundRectangle 20,20,0,0"
+                    HeightRequest="50"
+                    VerticalOptions="Start">
+                <Label x:Name="TitleLabel" 
+                       Text="Выбор даты" 
+                       TextColor="White" 
+                       FontSize="18" 
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
+            </Border>
+
+            <Button x:Name="CloseButton"
+                    Text="✕"
+                    FontSize="20"
+                    FontAttributes="Bold"
+                    TextColor="White"
+                    BackgroundColor="Transparent"
+                    WidthRequest="30"
+                    HeightRequest="30"
+                    HorizontalOptions="End"
+                    VerticalOptions="Start"
+                    Margin="0,10,15,0"
+                    Clicked="OnCloseClicked"/>
+
+            <VerticalStackLayout Margin="30" VerticalOptions="Center">
+                <Label Text="Выберите новую дату" 
+                       TextColor="#828CA0" 
+                       FontSize="14"
+                       HorizontalOptions="Center"
+                       Margin="0,0,0,20"/>
+
+                <DatePicker x:Name="DatePickerControl"
+                            Format="dd.MM.yyyy"
+                            Margin="0,0,0,30"
+                            HorizontalOptions="Fill"/>
+
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="15">
+                    <Button Text="Отмена" 
+                            Clicked="OnCancelClicked"
+                            WidthRequest="120"
+                            HeightRequest="40"
+                            BackgroundColor="Transparent"
+                            TextColor="#244484"
+                            BorderColor="#E1E8FF"
+                            BorderWidth="2"
+                            CornerRadius="8"/>
+
+                    <Button Text="Сохранить" 
+                            Clicked="OnSaveClicked"
+                            WidthRequest="120"
+                            HeightRequest="40"
+                            BackgroundColor="#244484"
+                            TextColor="White"
+                            CornerRadius="8"/>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Grid>
+    </Border>
+</ContentPage>

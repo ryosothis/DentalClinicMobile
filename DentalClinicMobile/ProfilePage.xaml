@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="DentalClinicMobile.ProfilePage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             BackgroundColor="#F5F6FA"
+             Title="Ваш кабинет">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="140"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackLayout Grid.Column="0" BackgroundColor="#244484" VerticalOptions="Fill" HorizontalOptions="Fill">
+            <StackLayout Orientation="Horizontal" Margin="18,26,0,16" VerticalOptions="Start">
+                <Label Text="Квио" TextColor="White" FontAttributes="Bold" FontSize="26"/>
+                <Image Source="logo.png" WidthRequest="32" HeightRequest="32" Margin="10,0,0,0"/>
+            </StackLayout>
+            <Label Text="цифровая стоматология" TextColor="White" Margin="18,-20,0,36" FontSize="9"/>
+            <StackLayout Margin="18,0,0,0">
+                <StackLayout Orientation="Horizontal" Margin="0,10,0,0" VerticalOptions="Center">
+                    <Image Source="home.png" WidthRequest="20" HeightRequest="20" Margin="0,0,10,0"/>
+                    <Label Text="Главная" TextColor="White" FontSize="16" VerticalOptions="Center"/>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnHomeTapped"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" Margin="0,10,0,0" VerticalOptions="Center">
+                    <Image Source="info.png" WidthRequest="20" HeightRequest="20" Margin="0,0,10,0"/>
+                    <Label Text="О клинике" TextColor="White" FontSize="16" VerticalOptions="Center"/>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnAboutTapped"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" Margin="0,10,0,0" VerticalOptions="Center">
+                    <Image Source="services.png" WidthRequest="20" HeightRequest="20" Margin="0,0,10,0"/>
+                    <Label Text="Услуги" TextColor="White" FontSize="16" VerticalOptions="Center"/>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnServicesTapped"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" Margin="0,10,0,0" VerticalOptions="Center">
+                    <Image Source="price.png" WidthRequest="20" HeightRequest="20" Margin="0,5,10,0"/>
+                    <Label Text="Цены" TextColor="White" FontSize="16" VerticalOptions="Center"/>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnPriceTapped"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" Margin="0,10,0,0" VerticalOptions="Center">
+                    <Image Source="user.png" WidthRequest="20" HeightRequest="20" Margin="0,0,10,0"/>
+                    <Label Text="Профиль" TextColor="White" FontSize="16" VerticalOptions="Center"/>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnProfileTapped"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Margin="18,20,0,20" VerticalOptions="EndAndExpand" Spacing="10">
+                <Image Source="vk.png" WidthRequest="20" HeightRequest="20"/>
+                <Image Source="whatsapp.png" WidthRequest="20" HeightRequest="20"/>
+                <Image Source="tg.png" WidthRequest="20" HeightRequest="20"/>
+            </StackLayout>
+        </StackLayout>
+
+        <ScrollView Grid.Column="1" BackgroundColor="#F5F6FA">
+            <StackLayout>
+                <ActivityIndicator x:Name="ProgressBar" 
+                                   HeightRequest="4" 
+                                   Margin="20,20,20,0" 
+                                   IsVisible="False"
+                                   IsRunning="False"
+                                   Color="#467EEA"/>
+
+                <HorizontalStackLayout x:Name="RoleButtonsPanel" 
+                                       HorizontalOptions="End"
+                                       Margin="20,20,20,0"
+                                       Spacing="10"
+                                       IsVisible="False">
+                    <Button x:Name="AdminPanelButton"
+                            Text="Админ-панель"
+                            BackgroundColor="#244484"
+                            TextColor="White"
+                            CornerRadius="8"
+                            Padding="15,8"
+                            Clicked="OnAdminPanelClicked"
+                            IsVisible="False"/>
+                    <Button x:Name="DoctorAppointmentsButton"
+                            Text="Мои записи на сегодня"
+                            BackgroundColor="#244484"
+                            TextColor="White"
+                            CornerRadius="8"
+                            Padding="15,8"
+                            Clicked="OnDoctorAppointmentsClicked"
+                            IsVisible="False"/>
+                    <Button x:Name="LogoutButton"
+                            Text="Выйти"
+                            BackgroundColor="Transparent"
+                            TextColor="#FF6B6B"
+                            BorderColor="#FF6B6B"
+                            BorderWidth="1"
+                            CornerRadius="8"
+                            Padding="15,8"
+                            Clicked="OnLogoutClicked"/>
+                </HorizontalStackLayout>
+
+                <StackLayout x:Name="MainContent" Margin="20">
+                    <Label Text="Профиль" 
+                           FontAttributes="Bold" 
+                           FontSize="28" 
+                           TextColor="#244484" 
+                           Margin="0,0,0,20"/>
+
+                    <Label x:Name="RoleTextBlock"
+                           Text="Роль: Загрузка..."
+                           FontSize="14"
+                           TextColor="#828CA0"
+                           FontAttributes="Bold"
+                           Margin="0,0,0,10"/>
+
+                    <Grid ColumnSpacing="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackLayout Grid.Column="0">
+                            <Border BackgroundColor="#FFFFFF" 
+                                    StrokeShape="RoundRectangle 16"
+                                    Stroke="#E1E8FF"
+                                    StrokeThickness="1"
+                                    Padding="20"
+                                    Margin="0,0,0,20">
+                                <VerticalStackLayout>
+                                    <VerticalStackLayout HorizontalOptions="Center" Margin="0,0,0,20">
+                                        <Border WidthRequest="100" HeightRequest="100" 
+                                                BackgroundColor="#E1E8FF" 
+                                                StrokeShape="RoundRectangle 50"
+                                                Stroke="#C9DEFF"
+                                                StrokeThickness="3"
+                                                Margin="0,0,0,15"
+                                                HorizontalOptions="Center">
+                                            <Image Source="avatar.png" 
+                                                   Aspect="AspectFit"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center"/>
+                                        </Border>
+
+                                        <VerticalStackLayout HorizontalOptions="Center" Spacing="0">
+                                            <Entry x:Name="FullNameTextBox"
+                                                   Text="Загрузка..."
+                                                   FontAttributes="Bold" 
+                                                   FontSize="18"
+                                                   HorizontalTextAlignment="Center"
+                                                   BackgroundColor="Transparent"
+                                                   TextColor="#244484"
+                                                   IsReadOnly="True"/>
+                                            <Button x:Name="EditNameButton"
+                                                    BackgroundColor="Transparent"
+                                                    WidthRequest="32"
+                                                    HeightRequest="32"
+                                                    HorizontalOptions="Center"
+                                                    Clicked="OnEditNameClicked">
+                                                <Button.ImageSource>
+                                                    <FileImageSource File="edit.png"/>
+                                                </Button.ImageSource>
+                                            </Button>
+                                        </VerticalStackLayout>
+                                    </VerticalStackLayout>
+
+                                    <VerticalStackLayout Margin="0,0,0,15">
+                                        <Label Text="Дата рождения" 
+                                               TextColor="#828CA0" 
+                                               FontSize="12"
+                                               FontAttributes="Bold"
+                                               Margin="0,0,0,5"/>
+                                        <Grid>
+                                            <Entry x:Name="BirthDateTextBox"
+                                                   Text="Загрузка..."
+                                                   FontSize="14"
+                                                   FontAttributes="Bold"
+                                                   BackgroundColor="Transparent"
+                                                   TextColor="#244484"
+                                                   IsReadOnly="True"/>
+                                            <Button x:Name="EditBirthDateButton"
+                                                    BackgroundColor="Transparent"
+                                                    WidthRequest="32"
+                                                    HeightRequest="32"
+                                                    HorizontalOptions="End"
+                                                    VerticalOptions="Center"
+                                                    Margin="0,0,10,0"
+                                                    Clicked="OnEditBirthDateClicked">
+                                                <Button.ImageSource>
+                                                    <FileImageSource File="edit.png"/>
+                                                </Button.ImageSource>
+                                            </Button>
+                                        </Grid>
+                                    </VerticalStackLayout>
+
+                                    <VerticalStackLayout Margin="0,20,0,0">
+                                        <Label Text="Контактная информация" 
+                                               TextColor="#244484" 
+                                               FontSize="14"
+                                               FontAttributes="Bold"
+                                               Margin="0,0,0,12"/>
+
+                                        <VerticalStackLayout Margin="0,0,0,12">
+                                            <Label Text="Email" 
+                                                   TextColor="#828CA0" 
+                                                   FontSize="12"
+                                                   FontAttributes="Bold"
+                                                   Margin="0,0,0,5"/>
+                                            <Grid>
+                                                <Entry x:Name="EmailTextBox"
+                                                       Text="Загрузка..."
+                                                       FontSize="14"
+                                                       BackgroundColor="Transparent"
+                                                       TextColor="#244484"
+                                                       IsReadOnly="True"/>
+                                                <Button x:Name="EditEmailButton"
+                                                        BackgroundColor="Transparent"
+                                                        WidthRequest="32"
+                                                        HeightRequest="32"
+                                                        HorizontalOptions="End"
+                                                        VerticalOptions="Center"
+                                                        Margin="0,0,10,0"
+                                                        Clicked="OnEditEmailClicked">
+                                                    <Button.ImageSource>
+                                                        <FileImageSource File="edit.png"/>
+                                                    </Button.ImageSource>
+                                                </Button>
+                                            </Grid>
+                                        </VerticalStackLayout>
+
+                                        <VerticalStackLayout Margin="0,0,0,10">
+                                            <Label Text="Телефон" 
+                                                   TextColor="#828CA0" 
+                                                   FontSize="12"
+                                                   FontAttributes="Bold"
+                                                   Margin="0,0,0,5"/>
+                                            <Grid>
+                                                <Entry x:Name="PhoneTextBox"
+                                                       Text="Загрузка..."
+                                                       FontSize="14"
+                                                       BackgroundColor="Transparent"
+                                                       TextColor="#244484"
+                                                       IsReadOnly="True"/>
+                                                <Button x:Name="EditPhoneButton"
+                                                        BackgroundColor="Transparent"
+                                                        WidthRequest="32"
+                                                        HeightRequest="32"
+                                                        HorizontalOptions="End"
+                                                        VerticalOptions="Center"
+                                                        Margin="0,0,10,0"
+                                                        Clicked="OnEditPhoneClicked">
+                                                    <Button.ImageSource>
+                                                        <FileImageSource File="edit.png"/>
+                                                    </Button.ImageSource>
+                                                </Button>
+                                            </Grid>
+                                        </VerticalStackLayout>
+                                    </VerticalStackLayout>
+                                </VerticalStackLayout>
+                            </Border>
+                        </StackLayout>
+
+                        <StackLayout Grid.Column="1">
+                            <Border BackgroundColor="#FFFFFF" 
+                                    StrokeShape="RoundRectangle 16"
+                                    Stroke="#E1E8FF"
+                                    StrokeThickness="1"
+                                    Padding="20"
+                                    Margin="0,0,0,20">
+                                <VerticalStackLayout>
+                                    <Label Text="История записей" 
+                                           FontAttributes="Bold" 
+                                           FontSize="18" 
+                                           TextColor="#244484" 
+                                           Margin="0,0,0,20"/>
+                                    <StackLayout x:Name="MedicalHistoryStackLayout"/>
+                                </VerticalStackLayout>
+                            </Border>
+                        </StackLayout>
+                    </Grid>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>
