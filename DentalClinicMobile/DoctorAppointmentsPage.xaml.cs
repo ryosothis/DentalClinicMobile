@@ -27,7 +27,7 @@ namespace DentalClinicMobile
                 if (!AuthManager.IsDoctor())
                 {
                     await DisplayAlert("Ошибка", "Доступ только для врачей", "OK");
-                    await Navigation.PopAsync();
+                    await Shell.Current.GoToAsync("..");
                     return;
                 }
 
@@ -79,8 +79,8 @@ namespace DentalClinicMobile
                 StrokeShape = new RoundRectangle { CornerRadius = 12 },
                 Stroke = Color.FromArgb("#E1E8FF"),
                 StrokeThickness = 1,
-                Padding = new Thickness(20),
-                Margin = new Thickness(0, 0, 0, 15)
+                Padding = new Thickness(16),
+                Margin = new Thickness(0, 0, 0, 12)
             };
 
             var mainGrid = new Grid();
@@ -95,7 +95,7 @@ namespace DentalClinicMobile
                 FontAttributes = FontAttributes.Bold,
                 FontSize = 16,
                 TextColor = Color.FromArgb("#244484"),
-                Margin = new Thickness(0, 0, 0, 10)
+                Margin = new Thickness(0, 0, 0, 8)
             };
 
             string patientName = $"{appointment["last_name"]} {appointment["first_name"]} {appointment["middle_name"]}".Trim();
@@ -104,7 +104,7 @@ namespace DentalClinicMobile
                 Text = $"👤 {patientName}",
                 FontSize = 14,
                 TextColor = Color.FromArgb("#244484"),
-                Margin = new Thickness(0, 0, 0, 5)
+                Margin = new Thickness(0, 0, 0, 4)
             };
 
             var serviceLabel = new Label
@@ -112,7 +112,7 @@ namespace DentalClinicMobile
                 Text = $"🦷 {appointment["service_name"]}",
                 FontSize = 14,
                 TextColor = Color.FromArgb("#244484"),
-                Margin = new Thickness(0, 0, 0, 5)
+                Margin = new Thickness(0, 0, 0, 4)
             };
 
             string phone = appointment["phone_number"]?.ToString() ?? "Не указан";
@@ -121,7 +121,7 @@ namespace DentalClinicMobile
                 Text = $"📞 {phone}",
                 FontSize = 12,
                 TextColor = Color.FromArgb("#828CA0"),
-                Margin = new Thickness(0, 0, 0, 10)
+                Margin = new Thickness(0, 0, 0, 8)
             };
 
             leftPanel.Children.Add(timeLabel);
@@ -134,12 +134,12 @@ namespace DentalClinicMobile
             var rightPanel = new VerticalStackLayout
             {
                 VerticalOptions = LayoutOptions.Center,
-                Margin = new Thickness(15, 0, 0, 0)
+                Margin = new Thickness(12, 0, 0, 0)
             };
 
             var diagnosisButton = new Button
             {
-                Text = "Поставить диагноз",
+                Text = "Диагноз",
                 BackgroundColor = Color.FromArgb("#4CAF50"),
                 TextColor = Colors.White,
                 CornerRadius = 6,
@@ -206,31 +206,6 @@ namespace DentalClinicMobile
         {
             LoadingIndicator.IsVisible = show;
             LoadingIndicator.IsRunning = show;
-        }
-
-        private async void OnHomeTapped(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new MainPage());
-        }
-
-        private async void OnAboutTapped(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new AboutPage());
-        }
-
-        private async void OnServicesTapped(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new ServicesPage());
-        }
-
-        private async void OnPriceTapped(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new PricePage());
-        }
-
-        private async void OnProfileTapped(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new ProfilePage());
         }
     }
 }

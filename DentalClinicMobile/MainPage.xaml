@@ -5,191 +5,124 @@
              BackgroundColor="#F5F6FA"
              Title="Главная">
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="140"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+    <ScrollView>
+        <StackLayout Padding="16" Spacing="0">
+            <Label Text="Цифровая точность – здоровая улыбка"
+                   HorizontalOptions="Center"
+                   FontAttributes="Bold"
+                   FontSize="24"
+                   Margin="0,20,0,4"
+                   TextColor="#244484"/>
 
-        <StackLayout Grid.Column="0" 
-                     BackgroundColor="#244484"
-                     VerticalOptions="Fill"
-                     HorizontalOptions="Fill">
+            <Label Text="Красивая улыбка – просто"
+                   HorizontalOptions="Center"
+                   FontSize="14"
+                   TextColor="#96A0B5"
+                   Margin="0,0,0,16"/>
 
-            <StackLayout Orientation="Horizontal" Margin="18,26,0,16" VerticalOptions="Start">
-                <Label Text="Квио" TextColor="White" FontAttributes="Bold" FontSize="26"/>
-                <Image Source="logo.png" WidthRequest="32" HeightRequest="32" Margin="10,0,0,0"/>
-            </StackLayout>
-            <Label Text="цифровая стоматология" TextColor="White" Margin="18,-20,0,36" FontSize="9"/>
+            <Border BackgroundColor="White"
+                    StrokeShape="RoundRectangle 12"
+                    Stroke="#E1E8FF"
+                    StrokeThickness="1"
+                    Padding="0"
+                    Margin="0,0,0,24">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-            <StackLayout Margin="18,0,0,0">
-                <StackLayout Orientation="Horizontal" Margin="0,10,0,0" VerticalOptions="Center">
-                    <Image Source="home.png" WidthRequest="20" HeightRequest="20" Margin="0,0,10,0"/>
-                    <Label Text="Главная" TextColor="White" FontSize="16" VerticalOptions="Center"/>
-                    <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnHomeTapped"/>
-                    </StackLayout.GestureRecognizers>
-                </StackLayout>
+                    <Border Grid.Column="0"
+                            WidthRequest="44"
+                            HeightRequest="44"
+                            BackgroundColor="White"
+                            StrokeShape="RoundRectangle 12">
+                        <Image Source="search.png"
+                               WidthRequest="20"
+                               HeightRequest="20"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
+                    </Border>
 
-                <StackLayout Orientation="Horizontal" Margin="0,10,0,0" VerticalOptions="Center">
-                    <Image Source="info.png" WidthRequest="20" HeightRequest="20" Margin="0,0,10,0"/>
-                    <Label Text="О клинике" TextColor="White" FontSize="16" VerticalOptions="Center"/>
-                    <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnAboutTapped"/>
-                    </StackLayout.GestureRecognizers>
-                </StackLayout>
+                    <Entry x:Name="SearchEntry"
+                           Grid.Column="1"
+                           BackgroundColor="White"
+                           TextColor="#244484"
+                           FontSize="15"
+                           Placeholder="Поиск услуг..."
+                           TextChanged="OnSearchTextChanged"/>
+                </Grid>
+            </Border>
 
-                <StackLayout Orientation="Horizontal" Margin="0,10,0,0" VerticalOptions="Center">
-                    <Image Source="services.png" WidthRequest="20" HeightRequest="20" Margin="0,0,10,0"/>
-                    <Label Text="Услуги" TextColor="White" FontSize="16" VerticalOptions="Center"/>
-                    <StackLayout.GestureRecognizers>
+            <Border Background="White"
+                    Stroke="#E1E8FF"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 12"
+                    Margin="0,-16,0,16"
+                    IsVisible="False"
+                    x:Name="SearchResultsBorder">
+                <ScrollView MaximumHeightRequest="300">
+                    <StackLayout x:Name="SearchResultsStack" Spacing="2"/>
+                </ScrollView>
+            </Border>
+
+            <Label Text="Наша клиника"
+                   FontAttributes="Bold"
+                   FontSize="22"
+                   HorizontalOptions="Center"
+                   TextColor="#244484"
+                   Margin="0,0,0,16"/>
+
+            <FlexLayout Wrap="Wrap" JustifyContent="Center" AlignItems="Center">
+                <Border Stroke="#C9DEFF" StrokeThickness="2" StrokeShape="RoundRectangle 16"
+                        WidthRequest="280" HeightRequest="220" Margin="6">
+                    <StackLayout Spacing="0">
+                        <Image Source="braces.png" HeightRequest="100" Margin="0,8,0,0"/>
+                        <Label Text="Исправление прикуса" FontAttributes="Bold" FontSize="15" HorizontalOptions="Center" Margin="0,10,0,2"/>
+                        <Button Text="Подробнее" HorizontalOptions="Center" Margin="0,8,0,0" BackgroundColor="#C9DEFF" TextColor="#244484" CornerRadius="10" Padding="18,2" Clicked="OnServicesTapped"/>
+                    </StackLayout>
+                    <Border.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnServicesTapped"/>
-                    </StackLayout.GestureRecognizers>
-                </StackLayout>
+                    </Border.GestureRecognizers>
+                </Border>
 
-                <StackLayout Orientation="Horizontal" Margin="0,10,0,0" VerticalOptions="Center">
-                    <Image Source="price.png" WidthRequest="20" HeightRequest="20" Margin="0,5,10,0"/>
-                    <Label Text="Цены" TextColor="White" FontSize="16" VerticalOptions="Center"/>
-                    <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnPriceTapped"/>
-                    </StackLayout.GestureRecognizers>
-                </StackLayout>
+                <Border Stroke="#C9DEFF" StrokeThickness="2" StrokeShape="RoundRectangle 16"
+                        WidthRequest="280" HeightRequest="220" Margin="6">
+                    <StackLayout Spacing="0">
+                        <Image Source="diagnostics.png" HeightRequest="100" Margin="0,8,0,0"/>
+                        <Label Text="Диагностика" FontAttributes="Bold" FontSize="15" HorizontalOptions="Center" Margin="0,10,0,2"/>
+                        <Button Text="Подробнее" HorizontalOptions="Center" Margin="0,8,0,0" BackgroundColor="#C9DEFF" TextColor="#244484" CornerRadius="10" Padding="18,2" Clicked="OnServicesTapped"/>
+                    </StackLayout>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnServicesTapped"/>
+                    </Border.GestureRecognizers>
+                </Border>
 
-                <StackLayout Orientation="Horizontal" Margin="0,10,0,0" VerticalOptions="Center">
-                    <Image Source="user.png" WidthRequest="20" HeightRequest="20" Margin="0,0,10,0"/>
-                    <Label Text="Профиль" TextColor="White" FontSize="16" VerticalOptions="Center"/>
-                    <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnProfileTapped"/>
-                    </StackLayout.GestureRecognizers>
-                </StackLayout>
-            </StackLayout>
+                <Border Stroke="#C9DEFF" StrokeThickness="2" StrokeShape="RoundRectangle 16"
+                        WidthRequest="280" HeightRequest="220" Margin="6">
+                    <StackLayout Spacing="0">
+                        <Image Source="treatment.png" HeightRequest="100" Margin="0,8,0,0"/>
+                        <Label Text="Лечение зубов" FontAttributes="Bold" FontSize="15" HorizontalOptions="Center" Margin="0,10,0,2"/>
+                        <Button Text="Подробнее" HorizontalOptions="Center" Margin="0,8,0,0" BackgroundColor="#C9DEFF" TextColor="#244484" CornerRadius="10" Padding="18,2" Clicked="OnServicesTapped"/>
+                    </StackLayout>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnServicesTapped"/>
+                    </Border.GestureRecognizers>
+                </Border>
+            </FlexLayout>
 
-            <StackLayout Orientation="Horizontal" Margin="18,20,0,20" VerticalOptions="EndAndExpand" Spacing="10">
-                <Image Source="vk.png" WidthRequest="20" HeightRequest="20"/>
-                <Image Source="whatsapp.png" WidthRequest="20" HeightRequest="20"/>
-                <Image Source="tg.png" WidthRequest="20" HeightRequest="20"/>
+            <FlexLayout Wrap="Wrap" JustifyContent="Center" Margin="0,16,0,0">
+                <Button Text="Протезирование" BackgroundColor="#EDF5FF" TextColor="#244484" Padding="18,4" Margin="4" FontSize="14" Clicked="OnServicesTapped"/>
+                <Button Text="Имплантация" BackgroundColor="#EDF5FF" TextColor="#244484" Padding="18,4" Margin="4" FontSize="14" Clicked="OnServicesTapped"/>
+                <Button Text="Отбеливание" BackgroundColor="#EDF5FF" TextColor="#244484" Padding="18,4" Margin="4" FontSize="14" Clicked="OnServicesTapped"/>
+                <Button Text="Для детей" BackgroundColor="#EDF5FF" TextColor="#244484" Padding="18,4" Margin="4" FontSize="14" Clicked="OnServicesTapped"/>
+            </FlexLayout>
+
+            <StackLayout Margin="0,24,0,16" Spacing="10">
+                <Button Text="Записаться на прием" BackgroundColor="#C9FFD9" TextColor="#2AA854" Padding="20,8" CornerRadius="10" FontSize="15" Clicked="OnMakeAppointmentClicked"/>
+                <Button Text="Наш адрес" BackgroundColor="#C9DEFF" TextColor="#244484" Padding="20,8" CornerRadius="10" FontSize="15" Clicked="OnAddressClicked"/>
+                <Button Text="Яндекс Карты" BackgroundColor="White" TextColor="#E93B26" Padding="20,8" CornerRadius="10" FontSize="15" Clicked="OnMapsClicked"/>
             </StackLayout>
         </StackLayout>
-
-        <ScrollView Grid.Column="1" BackgroundColor="#F5F6FA">
-            <StackLayout>
-                <Label Text="Цифровая точность – здоровая улыбка" 
-                       HorizontalOptions="Center" 
-                       FontAttributes="Bold"
-                       FontSize="32" 
-                       Margin="0,36,0,6" 
-                       TextColor="#244484"/>
-
-                <Label Text="Красивая улыбка – просто" 
-                       HorizontalOptions="Center" 
-                       FontSize="16"
-                       TextColor="#96A0B5" 
-                       Margin="0,0,0,16"/>
-
-                <!-- Поиск с результатами -->
-                <Grid WidthRequest="730" HorizontalOptions="Center" Margin="0,0,0,32">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="36"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Border Grid.Column="0"
-                                WidthRequest="36"
-                                HeightRequest="36"
-                                BackgroundColor="White"
-                                StrokeShape="RoundRectangle 8">
-                            <Image Source="search.png"
-                                   WidthRequest="18"
-                                   HeightRequest="18"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center"/>
-                        </Border>
-
-                        <Entry x:Name="SearchEntry"
-                               Grid.Column="1"
-                               BackgroundColor="White"
-                               TextColor="#244484"
-                               FontSize="16"
-                               HeightRequest="36"
-                               Placeholder="Поиск услуг..."
-                               TextChanged="OnSearchTextChanged"/>
-                    </Grid>
-
-                    <Border Grid.Row="1" 
-                            Background="White" 
-                            Stroke="#E1E8FF" 
-                            StrokeThickness="1"
-                            StrokeShape="RoundRectangle 8"
-                            Margin="0,5,0,0"
-                            IsVisible="False"
-                            x:Name="SearchResultsBorder">
-                        <ScrollView MaximumHeightRequest="300">
-                            <StackLayout x:Name="SearchResultsStack" Spacing="2"/>
-                        </ScrollView>
-                    </Border>
-                </Grid>
-
-                <Label Text="Наша клиника" 
-                       FontAttributes="Bold" 
-                       FontSize="28" 
-                       HorizontalOptions="Center" 
-                       TextColor="#244484" 
-                       Margin="0,0,0,24"/>
-
-                <HorizontalStackLayout HorizontalOptions="Center" Spacing="18">
-                    <Border Stroke="#C9DEFF" StrokeThickness="2" StrokeShape="RoundRectangle 22" WidthRequest="230" HeightRequest="240">
-                        <StackLayout>
-                            <Image Source="braces.png" HeightRequest="120" Margin="0,10,0,0"/>
-                            <Label Text="Исправление прикуса" FontAttributes="Bold" FontSize="16" HorizontalOptions="Center" Margin="0,14,0,2"/>
-                            <Button Text="Подробнее" HorizontalOptions="Center" Margin="0,10,0,0" BackgroundColor="#C9DEFF" TextColor="#244484" CornerRadius="10" Padding="18,2" Clicked="OnServicesTapped"/>
-                        </StackLayout>
-                        <Border.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnServicesTapped"/>
-                        </Border.GestureRecognizers>
-                    </Border>
-
-                    <Border Stroke="#C9DEFF" StrokeThickness="2" StrokeShape="RoundRectangle 22" WidthRequest="230" HeightRequest="240">
-                        <StackLayout>
-                            <Image Source="diagnostics.png" HeightRequest="120" Margin="0,10,0,0"/>
-                            <Label Text="Диагностика" FontAttributes="Bold" FontSize="16" HorizontalOptions="Center" Margin="0,14,0,2"/>
-                            <Button Text="Подробнее" HorizontalOptions="Center" Margin="0,10,0,0" BackgroundColor="#C9DEFF" TextColor="#244484" CornerRadius="10" Padding="18,2" Clicked="OnServicesTapped"/>
-                        </StackLayout>
-                        <Border.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnServicesTapped"/>
-                        </Border.GestureRecognizers>
-                    </Border>
-
-                    <Border Stroke="#C9DEFF" StrokeThickness="2" StrokeShape="RoundRectangle 22" WidthRequest="230" HeightRequest="240">
-                        <StackLayout>
-                            <Image Source="treatment.png" HeightRequest="120" Margin="0,10,0,0"/>
-                            <Label Text="Лечение зубов" FontAttributes="Bold" FontSize="16" HorizontalOptions="Center" Margin="0,14,0,2"/>
-                            <Button Text="Подробнее" HorizontalOptions="Center" Margin="0,10,0,0" BackgroundColor="#C9DEFF" TextColor="#244484" CornerRadius="10" Padding="18,2" Clicked="OnServicesTapped"/>
-                        </StackLayout>
-                        <Border.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnServicesTapped"/>
-                        </Border.GestureRecognizers>
-                    </Border>
-                </HorizontalStackLayout>
-
-                <HorizontalStackLayout HorizontalOptions="Center" Margin="0,28,0,0" Spacing="10">
-                    <Button Text="Протезирование" BackgroundColor="#EDF5FF" TextColor="#244484" Padding="22,4" Clicked="OnServicesTapped"/>
-                    <Button Text="Имплантация" BackgroundColor="#EDF5FF" TextColor="#244484" Padding="22,4" Clicked="OnServicesTapped"/>
-                    <Button Text="Отбеливание" BackgroundColor="#EDF5FF" TextColor="#244484" Padding="22,4" Clicked="OnServicesTapped"/>
-                    <Button Text="Для детей" BackgroundColor="#EDF5FF" TextColor="#244484" Padding="22,4" Clicked="OnServicesTapped"/>
-                </HorizontalStackLayout>
-
-                <HorizontalStackLayout HorizontalOptions="Center" Margin="0,36,0,0" Spacing="14">
-                    <Button Text="Записаться на прием" BackgroundColor="#C9FFD9" TextColor="#2AA854" Padding="28,8" Clicked="OnMakeAppointmentClicked"/>
-                    <Button Text="Наш адрес" BackgroundColor="#C9DEFF" TextColor="#244484" Padding="28,8" Clicked="OnAddressClicked"/>
-                    <Button Text="Яндекс Карты" BackgroundColor="White" TextColor="#E93B26" Padding="20,8" Clicked="OnMapsClicked"/>
-                </HorizontalStackLayout>
-            </StackLayout>
-        </ScrollView>
-    </Grid>
+    </ScrollView>
 </ContentPage>

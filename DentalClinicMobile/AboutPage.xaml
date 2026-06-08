@@ -13,7 +13,7 @@
             <Setter Property="HorizontalOptions" Value="Fill"/>
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="CornerRadius" Value="10"/>
-            <Setter Property="Margin" Value="0,15,0,0"/>
+            <Setter Property="Margin" Value="0,10,0,0"/>
         </Style>
 
         <Style x:Key="InfoSectionStyle" TargetType="Border">
@@ -21,13 +21,8 @@
             <Setter Property="StrokeShape" Value="RoundRectangle 12"/>
             <Setter Property="Stroke" Value="#E1E8FF"/>
             <Setter Property="StrokeThickness" Value="1"/>
-            <Setter Property="Padding" Value="20"/>
-            <Setter Property="Margin" Value="0,0,0,15"/>
-        </Style>
-
-        <Style x:Key="AdvantageItemStyle" TargetType="HorizontalStackLayout">
-            <Setter Property="Spacing" Value="10"/>
-            <Setter Property="Margin" Value="0,0,0,8"/>
+            <Setter Property="Padding" Value="16"/>
+            <Setter Property="Margin" Value="0,0,0,12"/>
         </Style>
 
         <Style x:Key="DoctorCardStyle" TargetType="Border">
@@ -41,201 +36,106 @@
         </Style>
     </ContentPage.Resources>
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="140"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+    <ScrollView>
+        <StackLayout Padding="16" Spacing="0">
+            <Label Text="О клинике"
+                   FontAttributes="Bold"
+                   FontSize="22"
+                   TextColor="#244484"
+                   Margin="0,0,0,12"/>
 
-        <StackLayout Grid.Column="0" 
-                     BackgroundColor="#244484"
-                     VerticalOptions="Fill"
-                     HorizontalOptions="Fill">
+            <Border Style="{StaticResource InfoSectionStyle}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Квио - цифровая стоматология"
+                           FontAttributes="Bold"
+                           FontSize="16"
+                           TextColor="#244484"/>
+                    <Label Text="Мы - современная стоматологическая клиника, которая сочетает в себе передовые технологии, высокий профессионализм и индивидуальный подход к каждому пациенту."
+                           TextColor="#828CA0"
+                           FontSize="13"/>
+                    <Label Text="В работе используем цифровые технологии: внутриротовые сканеры, 3D-диагностику, CAD/CAM системы для максимальной точности результатов."
+                           TextColor="#828CA0"
+                           FontSize="13"/>
+                </VerticalStackLayout>
+            </Border>
 
-            <StackLayout Orientation="Horizontal" Margin="18,26,0,16" VerticalOptions="Start">
-                <Label Text="Квио" TextColor="White" FontAttributes="Bold" FontSize="26"/>
-                <Image Source="logo.png" WidthRequest="32" HeightRequest="32" Margin="10,0,0,0"/>
-            </StackLayout>
-            <Label Text="цифровая стоматология" TextColor="White" Margin="18,-20,0,36" FontSize="9"/>
+            <Border Style="{StaticResource InfoSectionStyle}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Наши преимущества"
+                           FontAttributes="Bold"
+                           FontSize="16"
+                           TextColor="#244484"/>
+                    <VerticalStackLayout Spacing="6">
+                        <HorizontalStackLayout Spacing="8">
+                            <Border WidthRequest="20" HeightRequest="20"
+                                    BackgroundColor="#E1E8FF"
+                                    StrokeShape="RoundRectangle 5">
+                                <Label Text="✓" TextColor="#467EEA" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" FontSize="10"/>
+                            </Border>
+                            <Label Text="Цифровая диагностика" TextColor="#244484" FontSize="13" VerticalOptions="Center"/>
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout Spacing="8">
+                            <Border WidthRequest="20" HeightRequest="20"
+                                    BackgroundColor="#E1E8FF"
+                                    StrokeShape="RoundRectangle 5">
+                                <Label Text="✓" TextColor="#467EEA" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" FontSize="10"/>
+                            </Border>
+                            <Label Text="Современное оборудование" TextColor="#244484" FontSize="13" VerticalOptions="Center"/>
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout Spacing="8">
+                            <Border WidthRequest="20" HeightRequest="20"
+                                    BackgroundColor="#E1E8FF"
+                                    StrokeShape="RoundRectangle 5">
+                                <Label Text="✓" TextColor="#467EEA" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" FontSize="10"/>
+                            </Border>
+                            <Label Text="Опытные врачи" TextColor="#244484" FontSize="13" VerticalOptions="Center"/>
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout Spacing="8">
+                            <Border WidthRequest="20" HeightRequest="20"
+                                    BackgroundColor="#E1E8FF"
+                                    StrokeShape="RoundRectangle 5">
+                                <Label Text="✓" TextColor="#467EEA" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" FontSize="10"/>
+                            </Border>
+                            <Label Text="Прозрачные цены" TextColor="#244484" FontSize="13" VerticalOptions="Center"/>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Border>
 
-            <StackLayout Margin="18,0,0,0">
-                <StackLayout Orientation="Horizontal" Margin="0,10,0,0" VerticalOptions="Center">
-                    <Image Source="home.png" WidthRequest="20" HeightRequest="20" Margin="0,0,10,0"/>
-                    <Label Text="Главная" TextColor="White" FontSize="16" VerticalOptions="Center"/>
-                    <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnHomeTapped"/>
-                    </StackLayout.GestureRecognizers>
-                </StackLayout>
+            <Border Style="{StaticResource InfoSectionStyle}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Наша команда"
+                           FontAttributes="Bold"
+                           FontSize="16"
+                           TextColor="#244484"/>
+                    <FlexLayout x:Name="DoctorsFlexLayout" Wrap="Wrap" JustifyContent="Center"/>
+                </VerticalStackLayout>
+            </Border>
 
-                <StackLayout Orientation="Horizontal" Margin="0,10,0,0" VerticalOptions="Center">
-                    <Image Source="info.png" WidthRequest="20" HeightRequest="20" Margin="0,0,10,0"/>
-                    <Label Text="О клинике" TextColor="White" FontSize="16" VerticalOptions="Center"/>
-                    <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnAboutTapped"/>
-                    </StackLayout.GestureRecognizers>
-                </StackLayout>
-
-                <StackLayout Orientation="Horizontal" Margin="0,10,0,0" VerticalOptions="Center">
-                    <Image Source="services.png" WidthRequest="20" HeightRequest="20" Margin="0,0,10,0"/>
-                    <Label Text="Услуги" TextColor="White" FontSize="16" VerticalOptions="Center"/>
-                    <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnServicesTapped"/>
-                    </StackLayout.GestureRecognizers>
-                </StackLayout>
-
-                <StackLayout Orientation="Horizontal" Margin="0,10,0,0" VerticalOptions="Center">
-                    <Image Source="price.png" WidthRequest="20" HeightRequest="20" Margin="0,5,10,0"/>
-                    <Label Text="Цены" TextColor="White" FontSize="16" VerticalOptions="Center"/>
-                    <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnPriceTapped"/>
-                    </StackLayout.GestureRecognizers>
-                </StackLayout>
-
-                <StackLayout Orientation="Horizontal" Margin="0,10,0,0" VerticalOptions="Center">
-                    <Image Source="user.png" WidthRequest="20" HeightRequest="20" Margin="0,0,10,0"/>
-                    <Label Text="Профиль" TextColor="White" FontSize="16" VerticalOptions="Center"/>
-                    <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnProfileTapped"/>
-                    </StackLayout.GestureRecognizers>
-                </StackLayout>
-            </StackLayout>
-
-            <StackLayout Orientation="Horizontal" Margin="18,20,0,20" VerticalOptions="EndAndExpand" Spacing="10">
-                <Image Source="vk.png" WidthRequest="20" HeightRequest="20"/>
-                <Image Source="whatsapp.png" WidthRequest="20" HeightRequest="20"/>
-                <Image Source="tg.png" WidthRequest="20" HeightRequest="20"/>
-            </StackLayout>
+            <Border Style="{StaticResource InfoSectionStyle}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Контакты"
+                           FontAttributes="Bold"
+                           FontSize="16"
+                           TextColor="#244484"/>
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Адрес" FontAttributes="Bold" FontSize="12" TextColor="#244484"/>
+                        <Label Text="ул. Стоматологическая, д. 123" TextColor="#828CA0" FontSize="12"/>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Телефон" FontAttributes="Bold" FontSize="12" TextColor="#244484"/>
+                        <Label Text="+7 (999) 123-45-67" TextColor="#828CA0" FontSize="12"/>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Режим работы" FontAttributes="Bold" FontSize="12" TextColor="#244484"/>
+                        <Label Text="Пн-Пт: 9:00-21:00" TextColor="#828CA0" FontSize="12"/>
+                        <Label Text="Сб-Вс: 10:00-18:00" TextColor="#828CA0" FontSize="12"/>
+                    </VerticalStackLayout>
+                    <Button Text="Записаться"
+                            Style="{StaticResource AboutButtonStyle}"
+                            Clicked="OnBookAppointmentClicked"/>
+                </VerticalStackLayout>
+            </Border>
         </StackLayout>
-
-        <ScrollView Grid.Column="1" BackgroundColor="#F5F6FA">
-            <StackLayout Margin="15">
-                <Label Text="О клинике" 
-                       FontAttributes="Bold" 
-                       FontSize="24" 
-                       TextColor="#244484" 
-                       Margin="0,0,0,15"/>
-
-                <Border Style="{StaticResource InfoSectionStyle}">
-                    <VerticalStackLayout>
-                        <Label Text="Квио - цифровая стоматология" 
-                               FontAttributes="Bold" 
-                               FontSize="16" 
-                               TextColor="#244484" 
-                               Margin="0,0,0,10"/>
-
-                        <Label Text="Мы - современная стоматологическая клиника, которая сочетает в себе передовые технологии, высокий профессионализм и индивидуальный подход к каждому пациенту."
-                               TextColor="#828CA0" 
-                               FontSize="13"
-                               Margin="0,0,0,8"/>
-
-                        <Label Text="В работе используем цифровые технологии: внутриротовые сканеры, 3D-диагностику, CAD/CAM системы для максимальной точности результатов."
-                               TextColor="#828CA0" 
-                               FontSize="13"/>
-                    </VerticalStackLayout>
-                </Border>
-
-                <Border Style="{StaticResource InfoSectionStyle}">
-                    <VerticalStackLayout>
-                        <Label Text="Наши преимущества" 
-                               FontAttributes="Bold" 
-                               FontSize="16" 
-                               TextColor="#244484" 
-                               Margin="0,0,0,10"/>
-
-                        <VerticalStackLayout>
-                            <HorizontalStackLayout Style="{StaticResource AdvantageItemStyle}">
-                                <Border WidthRequest="20" HeightRequest="20" 
-                                        BackgroundColor="#E1E8FF" 
-                                        StrokeShape="RoundRectangle 5">
-                                    <Label Text="✓" TextColor="#467EEA" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" FontSize="10"/>
-                                </Border>
-                                <Label Text="Цифровая диагностика" TextColor="#244484" FontSize="13" VerticalOptions="Center"/>
-                            </HorizontalStackLayout>
-
-                            <HorizontalStackLayout Style="{StaticResource AdvantageItemStyle}">
-                                <Border WidthRequest="20" HeightRequest="20" 
-                                        BackgroundColor="#E1E8FF" 
-                                        StrokeShape="RoundRectangle 5">
-                                    <Label Text="✓" TextColor="#467EEA" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" FontSize="10"/>
-                                </Border>
-                                <Label Text="Современное оборудование" TextColor="#244484" FontSize="13" VerticalOptions="Center"/>
-                            </HorizontalStackLayout>
-
-                            <HorizontalStackLayout Style="{StaticResource AdvantageItemStyle}">
-                                <Border WidthRequest="20" HeightRequest="20" 
-                                        BackgroundColor="#E1E8FF" 
-                                        StrokeShape="RoundRectangle 5">
-                                    <Label Text="✓" TextColor="#467EEA" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" FontSize="10"/>
-                                </Border>
-                                <Label Text="Опытные врачи" TextColor="#244484" FontSize="13" VerticalOptions="Center"/>
-                            </HorizontalStackLayout>
-
-                            <HorizontalStackLayout Style="{StaticResource AdvantageItemStyle}">
-                                <Border WidthRequest="20" HeightRequest="20" 
-                                        BackgroundColor="#E1E8FF" 
-                                        StrokeShape="RoundRectangle 5">
-                                    <Label Text="✓" TextColor="#467EEA" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" FontSize="10"/>
-                                </Border>
-                                <Label Text="Прозрачные цены" TextColor="#244484" FontSize="13" VerticalOptions="Center"/>
-                            </HorizontalStackLayout>
-                        </VerticalStackLayout>
-                    </VerticalStackLayout>
-                </Border>
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="200"/>
-                    </Grid.ColumnDefinitions>
-
-                    <StackLayout Grid.Column="0">
-                        <Border Style="{StaticResource InfoSectionStyle}">
-                            <VerticalStackLayout>
-                                <Label Text="Наша команда" 
-                                       FontAttributes="Bold" 
-                                       FontSize="16" 
-                                       TextColor="#244484" 
-                                       Margin="0,0,0,10"/>
-
-                                <FlexLayout x:Name="DoctorsFlexLayout" Wrap="Wrap"/>
-                            </VerticalStackLayout>
-                        </Border>
-                    </StackLayout>
-
-                    <StackLayout Grid.Column="2">
-                        <Border Style="{StaticResource InfoSectionStyle}">
-                            <VerticalStackLayout>
-                                <Label Text="Контакты" 
-                                       FontAttributes="Bold" 
-                                       FontSize="16" 
-                                       TextColor="#244484" 
-                                       Margin="0,0,0,10"/>
-
-                                <VerticalStackLayout Margin="0,0,0,8">
-                                    <Label Text="Адрес" FontAttributes="Bold" FontSize="12" TextColor="#244484"/>
-                                    <Label Text="ул. Стоматологическая, д. 123" TextColor="#828CA0" FontSize="11"/>
-                                </VerticalStackLayout>
-
-                                <VerticalStackLayout Margin="0,0,0,8">
-                                    <Label Text="Телефон" FontAttributes="Bold" FontSize="12" TextColor="#244484"/>
-                                    <Label Text="+7 (999) 123-45-67" TextColor="#828CA0" FontSize="11"/>
-                                </VerticalStackLayout>
-
-                                <VerticalStackLayout Margin="0,0,0,8">
-                                    <Label Text="Режим работы" FontAttributes="Bold" FontSize="12" TextColor="#244484"/>
-                                    <Label Text="Пн-Пт: 9:00-21:00" TextColor="#828CA0" FontSize="11"/>
-                                    <Label Text="Сб-Вс: 10:00-18:00" TextColor="#828CA0" FontSize="11"/>
-                                </VerticalStackLayout>
-
-                                <Button Text="Записаться" 
-                                        Style="{StaticResource AboutButtonStyle}"
-                                        Clicked="OnBookAppointmentClicked"/>
-                            </VerticalStackLayout>
-                        </Border>
-                    </StackLayout>
-                </Grid>
-            </StackLayout>
-        </ScrollView>
-    </Grid>
+    </ScrollView>
 </ContentPage>

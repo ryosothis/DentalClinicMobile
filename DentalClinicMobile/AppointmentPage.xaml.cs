@@ -351,34 +351,6 @@ namespace DentalClinicMobile
             MainContent.IsVisible = !show;
         }
 
-        private async void OnHomeTapped(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new MainPage());
-        }
-
-        private async void OnAboutTapped(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new AboutPage());
-        }
-
-        private async void OnServicesTapped(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new ServicesPage());
-        }
-
-        private async void OnPriceTapped(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new PricePage());
-        }
-
-        private async void OnProfileTapped(object sender, EventArgs e)
-        {
-            if (AuthManager.IsAuthenticated || AuthManager.GetCurrentUserId().HasValue)
-                await Navigation.PushAsync(new ProfilePage());
-            else
-                await Navigation.PushAsync(new LoginPage());
-        }
-
         private async void OnConfirmAppointmentClicked(object sender, EventArgs e)
         {
             try
@@ -401,7 +373,7 @@ namespace DentalClinicMobile
                     return;
                 }
 
-                DateTime selectedDate = AppointmentDatePicker.Date;
+                DateTime selectedDate = AppointmentDatePicker.Date ?? DateTime.Today;
                 string selectedTime = TimePicker.SelectedItem.ToString();
 
                 DateTime appointmentDateTime = selectedDate.Add(TimeSpan.Parse(selectedTime));
@@ -427,7 +399,7 @@ namespace DentalClinicMobile
                 if (!userId.HasValue)
                 {
                     await DisplayAlert("Ошибка", "Ошибка авторизации. Пожалуйста, войдите снова.", "OK");
-                    await Navigation.PushAsync(new LoginPage());
+                    await Shell.Current.GoToAsync("LoginPage");
                     return;
                 }
 
@@ -444,7 +416,7 @@ namespace DentalClinicMobile
                         $"Время: {appointmentDateTime:HH:mm}",
                         "OK");
 
-                    await Navigation.PushAsync(new MainPage());
+                    await Shell.Current.GoToAsync("//MainPage");
                 }
                 else
                 {

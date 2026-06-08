@@ -39,7 +39,7 @@ namespace DentalClinicMobile
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Ошибка", $"Ошибка загрузки врачей: {ex.Message}", "OK");
+                await DisplayAlert("РћС€РёР±РєР°", $"РћС€РёР±РєР° Р·Р°РіСЂСѓР·РєРё РґР°РЅРЅС‹С…: {ex.Message}", "OK");
             }
         }
 
@@ -93,7 +93,7 @@ namespace DentalClinicMobile
 
             var specializationLabel = new Label
             {
-                Text = doctor["specialization"]?.ToString() ?? "Стоматолог",
+                Text = doctor["specialization"]?.ToString() ?? "РЎС‚РѕРјР°С‚РѕР»РѕРі",
                 TextColor = Color.FromArgb("#828CA0"),
                 FontSize = 10,
                 HorizontalOptions = LayoutOptions.Center
@@ -102,7 +102,7 @@ namespace DentalClinicMobile
             int experienceYears = Convert.ToInt32(doctor["experience_years"]);
             var experienceLabel = new Label
             {
-                Text = $"{experienceYears} лет",
+                Text = $"{experienceYears} Р»РµС‚",
                 TextColor = Color.FromArgb("#467EEA"),
                 FontSize = 9,
                 FontAttributes = FontAttributes.Bold,
@@ -123,7 +123,7 @@ namespace DentalClinicMobile
         {
             var noDoctorsLabel = new Label
             {
-                Text = "Информация о врачах временно недоступна",
+                Text = "РРЅС„РѕСЂРјР°С†РёСЏ Рѕ РІСЂР°С‡Р°С… РІСЂРµРјРµРЅРЅРѕ РЅРµРґРѕСЃС‚СѓРїРЅР°",
                 TextColor = Color.FromArgb("#828CA0"),
                 FontSize = 12,
                 HorizontalOptions = LayoutOptions.Center,
@@ -132,39 +132,12 @@ namespace DentalClinicMobile
             DoctorsFlexLayout.Children.Add(noDoctorsLabel);
         }
 
-        private async void OnHomeTapped(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new MainPage());
-        }
-
-        private void OnAboutTapped(object sender, EventArgs e)
-        {
-        }
-
-        private async void OnServicesTapped(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new ServicesPage());
-        }
-
-        private async void OnPriceTapped(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new PricePage());
-        }
-
-        private async void OnProfileTapped(object sender, EventArgs e)
-        {
-            if (AuthManager.IsAuthenticated || AuthManager.GetCurrentUserId().HasValue)
-                await Navigation.PushAsync(new ProfilePage());
-            else
-                await Navigation.PushAsync(new LoginPage());
-        }
-
         private async void OnBookAppointmentClicked(object sender, EventArgs e)
         {
             if (AuthManager.IsAuthenticated || AuthManager.GetCurrentUserId().HasValue)
-                await Navigation.PushAsync(new ServicesPage());
+                await Shell.Current.GoToAsync("//ServicesPage");
             else
-                await Navigation.PushAsync(new LoginPage());
+                await Shell.Current.GoToAsync("LoginPage");
         }
     }
 }

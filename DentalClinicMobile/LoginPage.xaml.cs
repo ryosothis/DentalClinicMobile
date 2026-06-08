@@ -24,7 +24,7 @@ namespace DentalClinicMobile
 
                 if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
                 {
-                    await DisplayAlert("Ошибка", "Введите email и пароль", "OK");
+                    await DisplayAlert("РћС€РёР±РєР°", "Р’РІРµРґРёС‚Рµ email Рё РїР°СЂРѕР»СЊ", "OK");
                     return;
                 }
 
@@ -35,52 +35,23 @@ namespace DentalClinicMobile
                     AuthManager.CurrentUser = user;
                     AuthManager.CurrentUserEmail = email;
 
-                    await DisplayAlert("Успех", "Вход выполнен успешно!", "OK");
-
-                    Application.Current.MainPage = new NavigationPage(new MainPage());
+                    await DisplayAlert("РЈСЃРїРµС…", "Р’С…РѕРґ РІС‹РїРѕР»РЅРµРЅ СѓСЃРїРµС€РЅРѕ!", "OK");
+                    await Shell.Current.GoToAsync("//MainPage");
                 }
                 else
                 {
-                    await DisplayAlert("Ошибка", "Неверный email или пароль", "OK");
+                    await DisplayAlert("РћС€РёР±РєР°", "РќРµРІРµСЂРЅС‹Р№ email РёР»Рё РїР°СЂРѕР»СЊ", "OK");
                 }
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Ошибка", $"Ошибка входа: {ex.Message}", "OK");
+                await DisplayAlert("РћС€РёР±РєР°", $"РћС€РёР±РєР° РІС…РѕРґР°: {ex.Message}", "OK");
             }
         }
 
         private async void OnRegisterTapped(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new RegisterPage());
-        }
-
-        private async void OnHomeTapped(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new MainPage());
-        }
-
-        private async void OnAboutTapped(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new AboutPage());
-        }
-
-        private async void OnServicesTapped(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new ServicesPage());
-        }
-
-        private async void OnPriceTapped(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new PricePage());
-        }
-
-        private async void OnProfileTapped(object sender, EventArgs e)
-        {
-            if (AuthManager.IsAuthenticated || AuthManager.GetCurrentUserId().HasValue)
-                await Navigation.PushAsync(new ProfilePage());
-            else
-                await Navigation.PushAsync(new LoginPage());
+            await Shell.Current.GoToAsync("RegisterPage");
         }
     }
 }

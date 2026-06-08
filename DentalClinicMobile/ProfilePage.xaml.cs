@@ -46,16 +46,16 @@ namespace DentalClinicMobile
             {
                 if (_currentUserId <= 0)
                 {
-                    await Navigation.PushAsync(new MainPage());
+                    await Shell.Current.GoToAsync("LoginPage");
                     return;
                 }
                 ShowLoadingIndicator(true);
                 bool userExists = await _databaseService.UserExistsAsync(_currentUserId);
                 if (!userExists)
                 {
-                    await DisplayAlert("Îøèáêà", "Ïîëüçîâàòåëü íå íàéäåí. Ïîæàëóéñòà, âîéäèòå ñíîâà.", "OK");
+                    await DisplayAlert("ÐžÑˆÐ¸Ð±ÐºÐ°", "ÐŸÐ¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒ Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½. ÐŸÐ¾Ð¶Ð°Ð»ÑƒÐ¹ÑÑ‚Ð°, Ð²Ð¾Ð¹Ð´Ð¸Ñ‚Ðµ ÑÐ½Ð¾Ð²Ð°.", "OK");
                     AuthManager.Logout();
-                    await Navigation.PushAsync(new LoginPage());
+                    await Shell.Current.GoToAsync("LoginPage");
                     return;
                 }
                 await Task.WhenAll(LoadUserDataAsync(), LoadMedicalHistoryAsync());
@@ -63,7 +63,7 @@ namespace DentalClinicMobile
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Îøèáêà", $"Îøèáêà çàãðóçêè äàííûõ: {ex.Message}", "OK");
+                await DisplayAlert("ÐžÑˆÐ¸Ð±ÐºÐ°", $"ÐžÑˆÐ¸Ð±ÐºÐ° Ð·Ð°Ð³Ñ€ÑƒÐ·ÐºÐ¸ Ð´Ð°Ð½Ð½Ñ‹Ñ…: {ex.Message}", "OK");
             }
             finally
             {
@@ -97,16 +97,16 @@ namespace DentalClinicMobile
                         DateTime birthDate = (DateTime)user["birth_date"];
                         BirthDateTextBox.Text = birthDate.ToString("dd.MM.yyyy");
                     }
-                    else BirthDateTextBox.Text = "Íå óêàçàíà";
+                    else BirthDateTextBox.Text = "ÐÐµ ÑƒÐºÐ°Ð·Ð°Ð½Ð°";
 
                     EmailTextBox.Text = user["email"].ToString();
-                    PhoneTextBox.Text = user["phone_number"]?.ToString() ?? "Íå óêàçàí";
-                    RoleTextBlock.Text = $"Ðîëü: {AuthManager.GetRoleName()}";
+                    PhoneTextBox.Text = user["phone_number"]?.ToString() ?? "ÐÐµ ÑƒÐºÐ°Ð·Ð°Ð½";
+                    RoleTextBlock.Text = $"Ð Ð¾Ð»ÑŒ: {AuthManager.GetRoleName()}";
                 }
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Îøèáêà", $"Îøèáêà çàãðóçêè ïðîôèëÿ: {ex.Message}", "OK");
+                await DisplayAlert("ÐžÑˆÐ¸Ð±ÐºÐ°", $"ÐžÑˆÐ¸Ð±ÐºÐ° Ð·Ð°Ð³Ñ€ÑƒÐ·ÐºÐ¸ Ð¿Ñ€Ð¾Ñ„Ð¸Ð»Ñ: {ex.Message}", "OK");
             }
         }
 
@@ -133,19 +133,19 @@ namespace DentalClinicMobile
                         grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
                         grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
 
-                        string diagnosis = record["diagnosis"]?.ToString() ?? "Êîíñóëüòàöèÿ";
-                        string doctorName = record["doctor_name"]?.ToString() ?? "Âðà÷ íå óêàçàí";
+                        string diagnosis = record["diagnosis"]?.ToString() ?? "ÐÐµ ÑƒÑÑ‚Ð°Ð½Ð¾Ð²Ð»ÐµÐ½";
+                        string doctorName = record["doctor_name"]?.ToString() ?? "Ð’Ñ€Ð°Ñ‡ Ð½Ðµ ÑƒÐºÐ°Ð·Ð°Ð½";
                         DateTime visitDate = (DateTime)record["visit_date"];
 
                         var leftStack = new VerticalStackLayout();
-                        leftStack.Add(new Label { Text = "Ìåäèöèíñêàÿ çàïèñü", TextColor = Color.FromArgb("#828CA0"), FontSize = 10, FontAttributes = FontAttributes.Bold });
+                        leftStack.Add(new Label { Text = "Ð£ÑÑ‚Ð°Ð½Ð¾Ð²Ð»ÐµÐ½Ð½Ñ‹Ð¹ Ð´Ð¸Ð°Ð³Ð½Ð¾Ð·", TextColor = Color.FromArgb("#828CA0"), FontSize = 10, FontAttributes = FontAttributes.Bold });
                         leftStack.Add(new Label { Text = diagnosis, FontAttributes = FontAttributes.Bold, FontSize = 14, TextColor = Color.FromArgb("#244484") });
-                        leftStack.Add(new Label { Text = $"Âðà÷: {doctorName}", TextColor = Color.FromArgb("#244484"), FontSize = 12 });
+                        leftStack.Add(new Label { Text = $"Ð’Ñ€Ð°Ñ‡: {doctorName}", TextColor = Color.FromArgb("#244484"), FontSize = 12 });
 
                         string treatment = record["treatment"]?.ToString();
                         if (!string.IsNullOrEmpty(treatment))
                         {
-                            leftStack.Add(new Label { Text = $"Ëå÷åíèå: {treatment}", TextColor = Color.FromArgb("#244484"), FontSize = 11 });
+                            leftStack.Add(new Label { Text = $"Ð›ÐµÑ‡ÐµÐ½Ð¸Ðµ: {treatment}", TextColor = Color.FromArgb("#244484"), FontSize = 11 });
                         }
 
                         var rightStack = new VerticalStackLayout
@@ -153,7 +153,7 @@ namespace DentalClinicMobile
                             HorizontalOptions = LayoutOptions.End,
                             Margin = new Thickness(10, 0, 0, 0)
                         };
-                        rightStack.Add(new Label { Text = "Äàòà ïðè¸ìà", TextColor = Color.FromArgb("#828CA0"), FontSize = 11, FontAttributes = FontAttributes.Bold });
+                        rightStack.Add(new Label { Text = "Ð”Ð°Ñ‚Ð° Ð²Ð¸Ð·Ð¸Ñ‚Ð°", TextColor = Color.FromArgb("#828CA0"), FontSize = 11, FontAttributes = FontAttributes.Bold });
                         rightStack.Add(new Label { Text = visitDate.ToString("dd.MM.yyyy HH:mm"), FontAttributes = FontAttributes.Bold, FontSize = 12, TextColor = Color.FromArgb("#244484") });
 
                         grid.Add(leftStack, 0, 0);
@@ -166,7 +166,7 @@ namespace DentalClinicMobile
                 {
                     MedicalHistoryStackLayout.Children.Add(new Label
                     {
-                        Text = "Ìåäèöèíñêèõ çàïèñåé íå íàéäåíî",
+                        Text = "Ð˜ÑÑ‚Ð¾Ñ€Ð¸Ñ Ð·Ð°Ð¿Ð¸ÑÐµÐ¹ Ð¾Ñ‚ÑÑƒÑ‚ÑÑ‚Ð²ÑƒÐµÑ‚",
                         TextColor = Color.FromArgb("#828CA0"),
                         FontSize = 14,
                         HorizontalOptions = LayoutOptions.Center,
@@ -176,7 +176,7 @@ namespace DentalClinicMobile
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Îøèáêà", $"Îøèáêà çàãðóçêè èñòîðèè: {ex.Message}", "OK");
+                await DisplayAlert("ÐžÑˆÐ¸Ð±ÐºÐ°", $"ÐžÑˆÐ¸Ð±ÐºÐ° Ð·Ð°Ð³Ñ€ÑƒÐ·ÐºÐ¸ Ð¸ÑÑ‚Ð¾Ñ€Ð¸Ð¸: {ex.Message}", "OK");
             }
         }
 
@@ -197,7 +197,7 @@ namespace DentalClinicMobile
 
                     if (success)
                     {
-                        await DisplayAlert("Óñïåõ", "ÔÈÎ óñïåøíî îáíîâëåíî", "OK");
+                        await DisplayAlert("Ð£ÑÐ¿ÐµÑ…", "Ð˜Ð¼Ñ ÑƒÑÐ¿ÐµÑˆÐ½Ð¾ Ð¾Ð±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¾", "OK");
                         string fullName = $"{lastName} {firstName} {middleName}".Trim();
                         FullNameTextBox.Text = fullName;
 
@@ -210,13 +210,13 @@ namespace DentalClinicMobile
                     }
                     else
                     {
-                        await DisplayAlert("Îøèáêà", "Îøèáêà ïðè îáíîâëåíèè ÔÈÎ", "OK");
+                        await DisplayAlert("ÐžÑˆÐ¸Ð±ÐºÐ°", "ÐžÑˆÐ¸Ð±ÐºÐ° Ð¿Ñ€Ð¸ Ð¾Ð±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ð¸ Ð¸Ð¼ÐµÐ½Ð¸", "OK");
                     }
                 }
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Îøèáêà", $"Îøèáêà: {ex.Message}", "OK");
+                await DisplayAlert("ÐžÑˆÐ¸Ð±ÐºÐ°", $"ÐžÑˆÐ¸Ð±ÐºÐ°: {ex.Message}", "OK");
             }
         }
 
@@ -230,7 +230,7 @@ namespace DentalClinicMobile
                     currentDate = parsedDate;
                 }
 
-                var dialog = new EditDateDialog("Äàòà ðîæäåíèÿ", currentDate);
+                var dialog = new EditDateDialog("Ð”Ð°Ñ‚Ð° Ñ€Ð¾Ð¶Ð´ÐµÐ½Ð¸Ñ", currentDate);
                 await Navigation.PushModalAsync(dialog);
 
                 if (dialog.IsConfirmed)
@@ -241,7 +241,7 @@ namespace DentalClinicMobile
 
                     if (success)
                     {
-                        await DisplayAlert("Óñïåõ", "Äàòà ðîæäåíèÿ óñïåøíî îáíîâëåíà", "OK");
+                        await DisplayAlert("Ð£ÑÐ¿ÐµÑ…", "Ð”Ð°Ñ‚Ð° Ñ€Ð¾Ð¶Ð´ÐµÐ½Ð¸Ñ ÑƒÑÐ¿ÐµÑˆÐ½Ð¾ Ð¾Ð±Ð½Ð¾Ð²Ð»ÐµÐ½Ð°", "OK");
                         BirthDateTextBox.Text = newDate.ToString("dd.MM.yyyy");
 
                         if (AuthManager.CurrentUser != null)
@@ -251,13 +251,13 @@ namespace DentalClinicMobile
                     }
                     else
                     {
-                        await DisplayAlert("Îøèáêà", "Îøèáêà ïðè îáíîâëåíèè äàòû ðîæäåíèÿ", "OK");
+                        await DisplayAlert("ÐžÑˆÐ¸Ð±ÐºÐ°", "ÐžÑˆÐ¸Ð±ÐºÐ° Ð¿Ñ€Ð¸ Ð¾Ð±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ð¸ Ð´Ð°Ñ‚Ñ‹ Ñ€Ð¾Ð¶Ð´ÐµÐ½Ð¸Ñ", "OK");
                     }
                 }
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Îøèáêà", $"Îøèáêà: {ex.Message}", "OK");
+                await DisplayAlert("ÐžÑˆÐ¸Ð±ÐºÐ°", $"ÐžÑˆÐ¸Ð±ÐºÐ°: {ex.Message}", "OK");
             }
         }
         private async void OnEditEmailClicked(object sender, EventArgs e)
@@ -266,7 +266,7 @@ namespace DentalClinicMobile
             {
                 string currentEmail = EmailTextBox.Text;
 
-                var dialog = new EditTextDialog("Email", currentEmail, "Ââåäèòå íîâûé email");
+                var dialog = new EditTextDialog("Email", currentEmail, "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð¾Ð²Ñ‹Ð¹ email");
                 await Navigation.PushModalAsync(dialog);
 
                 string newEmail = await dialog.ShowDialogAsync();
@@ -275,13 +275,13 @@ namespace DentalClinicMobile
                 {
                     if (!IsValidEmail(newEmail))
                     {
-                        await DisplayAlert("Îøèáêà", "Ââåäèòå êîððåêòíûé email", "OK");
+                        await DisplayAlert("ÐžÑˆÐ¸Ð±ÐºÐ°", "ÐÐµÐºÐ¾Ñ€Ñ€ÐµÐºÑ‚Ð½Ñ‹Ð¹ email", "OK");
                         return;
                     }
 
                     if (await _databaseService.CheckEmailExistsAsync(newEmail))
                     {
-                        await DisplayAlert("Îøèáêà", "Ýòîò email óæå èñïîëüçóåòñÿ", "OK");
+                        await DisplayAlert("ÐžÑˆÐ¸Ð±ÐºÐ°","Ð­Ñ‚Ð¾Ñ‚ email ÑƒÐ¶Ðµ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐµÑ‚ÑÑ", "OK");
                         return;
                     }
 
@@ -289,24 +289,24 @@ namespace DentalClinicMobile
 
                     if (result == 1)
                     {
-                        await DisplayAlert("Óñïåõ", "Email óñïåøíî îáíîâëåí", "OK");
+                        await DisplayAlert("Ð£ÑÐ¿ÐµÑ…", "Email ÑƒÑÐ¿ÐµÑˆÐ½Ð¾ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½", "OK");
                         EmailTextBox.Text = newEmail;
                         if (AuthManager.CurrentUser != null) AuthManager.CurrentUser.Email = newEmail;
                         AuthManager.CurrentUserEmail = newEmail;
                     }
                     else if (result == -1)
                     {
-                        await DisplayAlert("Îøèáêà", "Ýòîò email óæå èñïîëüçóåòñÿ", "OK");
+                        await DisplayAlert("ÐžÑˆÐ¸Ð±ÐºÐ°", "Ð­Ñ‚Ð¾Ñ‚ email ÑƒÐ¶Ðµ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐµÑ‚ÑÑ", "OK");
                     }
                     else
                     {
-                        await DisplayAlert("Îøèáêà", "Îøèáêà ïðè îáíîâëåíèè email", "OK");
+                        await DisplayAlert("ÐžÑˆÐ¸Ð±ÐºÐ°", "ÐžÑˆÐ¸Ð±ÐºÐ° Ð¿Ñ€Ð¸ Ð¾Ð±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ð¸ email", "OK");
                     }
                 }
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Îøèáêà", $"Îøèáêà: {ex.Message}", "OK");
+                await DisplayAlert("ÐžÑˆÐ¸Ð±ÐºÐ°", $"ÐžÑˆÐ¸Ð±ÐºÐ°: {ex.Message}", "OK");
             }
         }
 
@@ -314,9 +314,9 @@ namespace DentalClinicMobile
         {
             try
             {
-                string currentPhone = PhoneTextBox.Text == "Íå óêàçàí" ? "" : PhoneTextBox.Text;
+                string currentPhone = PhoneTextBox.Text == "ÐÐµ ÑƒÐºÐ°Ð·Ð°Ð½" ? "" : PhoneTextBox.Text;
 
-                var dialog = new EditTextDialog("Òåëåôîí", currentPhone, "Ââåäèòå íîâûé íîìåð");
+                var dialog = new EditTextDialog("Ð¢ÐµÐ»ÐµÑ„Ð¾Ð½", currentPhone, "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð¾Ð²Ñ‹Ð¹ Ð½Ð¾Ð¼ÐµÑ€");
                 await Navigation.PushModalAsync(dialog);
 
                 string newPhone = await dialog.ShowDialogAsync();
@@ -327,29 +327,30 @@ namespace DentalClinicMobile
 
                     if (success)
                     {
-                        await DisplayAlert("Óñïåõ", "Íîìåð òåëåôîíà îáíîâëåí", "OK");
-                        PhoneTextBox.Text = string.IsNullOrEmpty(newPhone) ? "Íå óêàçàí" : newPhone;
+                        await DisplayAlert("Ð£ÑÐ¿ÐµÑ…", "Ð¢ÐµÐ»ÐµÑ„Ð¾Ð½ ÑƒÑÐ¿ÐµÑˆÐ½Ð¾ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½", "OK");
+                        PhoneTextBox.Text = string.IsNullOrEmpty(newPhone) ? "ÐÐµ ÑƒÐºÐ°Ð·Ð°Ð½" : newPhone;
                         if (AuthManager.CurrentUser != null) AuthManager.CurrentUser.PhoneNumber = newPhone;
                     }
                     else
                     {
-                        await DisplayAlert("Îøèáêà", "Îøèáêà ïðè îáíîâëåíèè òåëåôîíà", "OK");
+                        await DisplayAlert("ÐžÑˆÐ¸Ð±ÐºÐ°", "ÐžÑˆÐ¸Ð±ÐºÐ° Ð¿Ñ€Ð¸ Ð¾Ð±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ð¸ Ñ‚ÐµÐ»ÐµÑ„Ð¾Ð½Ð°", "OK");
                     }
                 }
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Îøèáêà", $"Îøèáêà: {ex.Message}", "OK");
+                await DisplayAlert("ÐžÑˆÐ¸Ð±ÐºÐ°", $"ÐžÑˆÐ¸Ð±ÐºÐ°: {ex.Message}", "OK");
             }
         }
 
         private async void OnLogoutClicked(object sender, EventArgs e)
         {
-            bool result = await DisplayAlert("Âûõîä", "Âû óâåðåíû, ÷òî õîòèòå âûéòè?", "Äà", "Íåò");
+            bool result = await DisplayAlert("Ð’Ñ‹Ñ…Ð¾Ð´", "Ð’Ñ‹ ÑƒÐ²ÐµÑ€ÐµÐ½Ñ‹, Ñ‡Ñ‚Ð¾ Ñ…Ð¾Ñ‚Ð¸Ñ‚Ðµ Ð²Ñ‹Ð¹Ñ‚Ð¸?", "Ð”Ð°", "ÐÐµÑ‚");
             if (result)
             {
                 AuthManager.Logout();
-                Application.Current.MainPage = new NavigationPage(new LoginPage());
+                Application.Current.MainPage = new AppShell();
+                await Shell.Current.GoToAsync("LoginPage");
             }
         }
 
@@ -371,26 +372,6 @@ namespace DentalClinicMobile
         private async void OnAdminPanelClicked(object sender, EventArgs e) { }
 
         private async void OnDoctorAppointmentsClicked(object sender, EventArgs e)
-            => await Navigation.PushAsync(new DoctorAppointmentsPage());
-
-        private async void OnHomeTapped(object sender, EventArgs e)
-            => await Navigation.PushAsync(new MainPage());
-
-        private async void OnAboutTapped(object sender, EventArgs e)
-            => await Navigation.PushAsync(new AboutPage());
-
-        private async void OnServicesTapped(object sender, EventArgs e)
-            => await Navigation.PushAsync(new ServicesPage());
-
-        private async void OnPriceTapped(object sender, EventArgs e)
-            => await Navigation.PushAsync(new PricePage());
-
-        private async void OnProfileTapped(object sender, EventArgs e)
-        {
-            if (AuthManager.IsAuthenticated || AuthManager.GetCurrentUserId().HasValue)
-                await Navigation.PushAsync(new ProfilePage());
-            else
-                await Navigation.PushAsync(new LoginPage());
-        }
+            => await Shell.Current.GoToAsync("DoctorAppointmentsPage");
     }
 }

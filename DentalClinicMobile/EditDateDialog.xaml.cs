@@ -29,7 +29,7 @@ namespace DentalClinicMobile
 
         private async void OnSaveClicked(object sender, EventArgs e)
         {
-            SelectedDate = DatePickerControl.Date;
+            SelectedDate = DatePickerControl.Date ?? DateTime.Today;
             IsConfirmed = true;
             await Navigation.PopModalAsync();
         }

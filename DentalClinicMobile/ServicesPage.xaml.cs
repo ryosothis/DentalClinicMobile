@@ -138,7 +138,7 @@ namespace DentalClinicMobile
 
         private async void ServiceCard_Click(int serviceId, string serviceName)
         {
-            await Navigation.PushAsync(new AppointmentPage(serviceId));
+            await Shell.Current.GoToAsync($"AppointmentPage?serviceId={serviceId}");
         }
 
         private string GetServiceIcon(string serviceName)
@@ -223,47 +223,16 @@ namespace DentalClinicMobile
             MainContent.IsVisible = !show;
         }
 
-        private async void OnHomeTapped(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new MainPage());
-        }
-
-        private async void OnAboutTapped(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new AboutPage());
-        }
-
-        private void OnServicesTapped(object sender, EventArgs e)
-        {
-        }
-
-        private async void OnPriceTapped(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new PricePage());
-        }
-
-        private async void OnProfileTapped(object sender, EventArgs e)
-        {
-            if (AuthManager.IsAuthenticated || AuthManager.GetCurrentUserId().HasValue)
-            {
-                await Navigation.PushAsync(new ProfilePage());
-            }
-            else
-            {
-                await DisplayAlert("Внимание", "Пожалуйста, войдите в систему для просмотра профиля", "OK");
-            }
-        }
-
         private async void OnAppointmentButtonClicked(object sender, EventArgs e)
         {
             if (AuthManager.IsAuthenticated || AuthManager.GetCurrentUserId().HasValue)
             {
-                await Navigation.PushAsync(new AppointmentPage());
+                await Shell.Current.GoToAsync("AppointmentPage");
             }
             else
             {
                 await DisplayAlert("Внимание", "Пожалуйста, войдите в систему для записи на прием", "OK");
-                await Navigation.PushAsync(new LoginPage());
+                await Shell.Current.GoToAsync("LoginPage");
             }
         }
 

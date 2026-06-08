@@ -55,7 +55,7 @@ namespace DentalClinicMobile
 
                         var priceLabel = new Label
                         {
-                            Text = $"{price:N0} руб.",
+                            Text = $"{price:N0} СЂСѓР±.",
                             FontSize = 15,
                             TextColor = Color.FromArgb("#467EEA"),
                             FontAttributes = FontAttributes.Bold,
@@ -76,7 +76,7 @@ namespace DentalClinicMobile
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Ошибка", $"Ошибка загрузки услуг: {ex.Message}", "OK");
+                await DisplayAlert("РћС€РёР±РєР°", $"РћС€РёР±РєР° Р·Р°РіСЂСѓР·РєРё С†РµРЅ: {ex.Message}", "OK");
             }
             finally
             {
@@ -90,7 +90,7 @@ namespace DentalClinicMobile
 
             var noServicesLabel = new Label
             {
-                Text = "Информация об услугах временно недоступна",
+                Text = "РЈСЃР»СѓРіРё РІСЂРµРјРµРЅРЅРѕ РЅРµРґРѕСЃС‚СѓРїРЅС‹",
                 TextColor = Color.FromArgb("#828CA0"),
                 FontSize = 14,
                 HorizontalOptions = LayoutOptions.Center,
@@ -109,47 +109,16 @@ namespace DentalClinicMobile
             MainContent.IsVisible = !show;
         }
 
-        private async void OnHomeTapped(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new MainPage());
-        }
-
-        private async void OnAboutTapped(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new AboutPage());
-        }
-
-        private async void OnServicesTapped(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new ServicesPage());
-        }
-
-        private void OnPriceTapped(object sender, EventArgs e)
-        {
-        }
-
-        private async void OnProfileTapped(object sender, EventArgs e)
-        {
-            if (AuthManager.IsAuthenticated || AuthManager.GetCurrentUserId().HasValue)
-            {
-                await Navigation.PushAsync(new ProfilePage());
-            }
-            else
-            {
-                await DisplayAlert("Внимание", "Пожалуйста, войдите в систему для просмотра профиля", "OK");
-            }
-        }
-
         private async void OnBookAppointmentClicked(object sender, EventArgs e)
         {
             if (AuthManager.IsAuthenticated || AuthManager.GetCurrentUserId().HasValue)
             {
-                await Navigation.PushAsync(new ServicesPage());
+                await Shell.Current.GoToAsync("//ServicesPage");
             }
             else
             {
-                await DisplayAlert("Внимание", "Пожалуйста, войдите в систему для записи на прием", "OK");
-                await Navigation.PushAsync(new LoginPage());
+                await DisplayAlert("Р’РЅРёРјР°РЅРёРµ", "РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РІРѕР№РґРёС‚Рµ РІ СЃРёСЃС‚РµРјСѓ РґР»СЏ Р·Р°РїРёСЃРё РЅР° РїСЂРёРµРј", "OK");
+                await Shell.Current.GoToAsync("LoginPage");
             }
         }
     }

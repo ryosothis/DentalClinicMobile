@@ -22,10 +22,6 @@ namespace DentalClinicMobile
             Loaded += async (s, e) => await LoadServiceInfoAsync();
         }
 
-        public ServiceInfoPage() : this(1)
-        {
-        }
-
         private async Task LoadServiceInfoAsync()
         {
             try
@@ -176,48 +172,16 @@ namespace DentalClinicMobile
             MainContent.IsVisible = !show;
         }
 
-        private async void OnHomeTapped(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new MainPage());
-        }
-
-        private async void OnAboutTapped(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new AboutPage());
-        }
-
-        private async void OnServicesTapped(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new ServicesPage());
-        }
-
-        private async void OnPriceTapped(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new PricePage());
-        }
-
-        private async void OnProfileTapped(object sender, EventArgs e)
-        {
-            if (AuthManager.IsAuthenticated || AuthManager.GetCurrentUserId().HasValue)
-            {
-                await Navigation.PushAsync(new ProfilePage());
-            }
-            else
-            {
-                await DisplayAlert("Внимание", "Пожалуйста, войдите в систему для просмотра профиля", "OK");
-            }
-        }
-
         private async void OnBookAppointmentClicked(object sender, EventArgs e)
         {
             if (AuthManager.IsAuthenticated || AuthManager.GetCurrentUserId().HasValue)
             {
-                await Navigation.PushAsync(new AppointmentPage(_serviceId));
+                await Shell.Current.GoToAsync($"AppointmentPage?serviceId={_serviceId}");
             }
             else
             {
                 await DisplayAlert("Внимание", "Пожалуйста, войдите в систему для записи на прием", "OK");
-                await Navigation.PushAsync(new LoginPage());
+                await Shell.Current.GoToAsync("LoginPage");
             }
         }
     }

@@ -5,154 +5,83 @@
              BackgroundColor="#F5F6FA"
              Title="Регистрация">
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="140"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+    <ScrollView>
+        <Border Margin="16"
+                Padding="20"
+                CornerRadius="20"
+                BorderColor="#E1E8FF"
+                BackgroundColor="White"
+                HorizontalOptions="Fill">
+            <VerticalStackLayout Spacing="10">
+                <Label Text="Регистрация"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="#244484"
+                       HorizontalOptions="Center"/>
 
-        <StackLayout Grid.Column="0" 
-                     BackgroundColor="#244484"
-                     VerticalOptions="Fill"
-                     HorizontalOptions="Fill">
+                <VerticalStackLayout Spacing="3">
+                    <Label Text="Имя" TextColor="#244484" FontAttributes="Bold" FontSize="13"/>
+                    <Entry x:Name="FirstNameEntry" Placeholder="Введите имя" TextColor="#244484" BackgroundColor="White"/>
+                </VerticalStackLayout>
 
-            <StackLayout Orientation="Horizontal" Margin="18,26,0,16" VerticalOptions="Start">
-                <Label Text="Квио" TextColor="White" FontAttributes="Bold" FontSize="26"/>
-                <Image Source="logo.png" WidthRequest="32" HeightRequest="32" Margin="10,0,0,0"/>
-            </StackLayout>
-            <Label Text="цифровая стоматология" TextColor="White" Margin="18,-20,0,36" FontSize="9"/>
+                <VerticalStackLayout Spacing="3">
+                    <Label Text="Фамилия" TextColor="#244484" FontAttributes="Bold" FontSize="13"/>
+                    <Entry x:Name="LastNameEntry" Placeholder="Введите фамилию" TextColor="#244484" BackgroundColor="White"/>
+                </VerticalStackLayout>
 
-            <StackLayout Margin="18,0,0,0">
-                <StackLayout Orientation="Horizontal" Margin="0,10,0,0" VerticalOptions="Center">
-                    <Image Source="home.png" WidthRequest="20" HeightRequest="20" Margin="0,0,10,0"/>
-                    <Label Text="Главная" TextColor="White" FontSize="16" VerticalOptions="Center"/>
-                    <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnHomeTapped"/>
-                    </StackLayout.GestureRecognizers>
-                </StackLayout>
+                <VerticalStackLayout Spacing="3">
+                    <Label Text="Отчество" TextColor="#244484" FontAttributes="Bold" FontSize="13"/>
+                    <Entry x:Name="MiddleNameEntry" Placeholder="Введите отчество" TextColor="#244484" BackgroundColor="White"/>
+                </VerticalStackLayout>
 
-                <StackLayout Orientation="Horizontal" Margin="0,10,0,0" VerticalOptions="Center">
-                    <Image Source="info.png" WidthRequest="20" HeightRequest="20" Margin="0,0,10,0"/>
-                    <Label Text="О клинике" TextColor="White" FontSize="16" VerticalOptions="Center"/>
-                    <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnAboutTapped"/>
-                    </StackLayout.GestureRecognizers>
-                </StackLayout>
+                <VerticalStackLayout Spacing="3">
+                    <Label Text="Телефон" TextColor="#244484" FontAttributes="Bold" FontSize="13"/>
+                    <Entry x:Name="PhoneEntry" Keyboard="Telephone" Placeholder="+7" TextColor="#244484" BackgroundColor="White"/>
+                </VerticalStackLayout>
 
-                <StackLayout Orientation="Horizontal" Margin="0,10,0,0" VerticalOptions="Center">
-                    <Image Source="services.png" WidthRequest="20" HeightRequest="20" Margin="0,0,10,0"/>
-                    <Label Text="Услуги" TextColor="White" FontSize="16" VerticalOptions="Center"/>
-                    <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnServicesTapped"/>
-                    </StackLayout.GestureRecognizers>
-                </StackLayout>
+                <VerticalStackLayout Spacing="3">
+                    <Label Text="Email" TextColor="#244484" FontAttributes="Bold" FontSize="13"/>
+                    <Entry x:Name="EmailEntry" Keyboard="Email" Placeholder="example@mail.ru" TextColor="#244484" BackgroundColor="White"/>
+                </VerticalStackLayout>
 
-                <StackLayout Orientation="Horizontal" Margin="0,10,0,0" VerticalOptions="Center">
-                    <Image Source="price.png" WidthRequest="20" HeightRequest="20" Margin="0,5,10,0"/>
-                    <Label Text="Цены" TextColor="White" FontSize="16" VerticalOptions="Center"/>
-                    <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnPriceTapped"/>
-                    </StackLayout.GestureRecognizers>
-                </StackLayout>
+                <VerticalStackLayout Spacing="3">
+                    <Label Text="Дата рождения" TextColor="#244484" FontAttributes="Bold" FontSize="13"/>
+                    <DatePicker x:Name="BirthDatePicker" Format="dd.MM.yyyy" BackgroundColor="White"/>
+                </VerticalStackLayout>
 
-                <StackLayout Orientation="Horizontal" Margin="0,10,0,0" VerticalOptions="Center">
-                    <Image Source="user.png" WidthRequest="20" HeightRequest="20" Margin="0,0,10,0"/>
-                    <Label Text="Профиль" TextColor="White" FontSize="16" VerticalOptions="Center"/>
-                    <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnProfileTapped"/>
-                    </StackLayout.GestureRecognizers>
-                </StackLayout>
-            </StackLayout>
+                <VerticalStackLayout Spacing="3">
+                    <Label Text="Пароль" TextColor="#244484" FontAttributes="Bold" FontSize="13"/>
+                    <Entry x:Name="PasswordEntry" IsPassword="True" Placeholder="Пароль" TextColor="#244484" BackgroundColor="White"/>
+                </VerticalStackLayout>
 
-            <StackLayout Orientation="Horizontal" Margin="18,20,0,20" VerticalOptions="EndAndExpand" Spacing="10">
-                <Image Source="vk.png" WidthRequest="20" HeightRequest="20"/>
-                <Image Source="whatsapp.png" WidthRequest="20" HeightRequest="20"/>
-                <Image Source="tg.png" WidthRequest="20" HeightRequest="20"/>
-            </StackLayout>
-        </StackLayout>
+                <VerticalStackLayout Spacing="3">
+                    <Label Text="Подтверждение пароля" TextColor="#244484" FontAttributes="Bold" FontSize="13"/>
+                    <Entry x:Name="ConfirmPasswordEntry" IsPassword="True" Placeholder="Повторите пароль" TextColor="#244484" BackgroundColor="White"/>
+                </VerticalStackLayout>
 
-        <ScrollView Grid.Column="1" BackgroundColor="#F5F6FA">
-            <Grid>
-                <Frame WidthRequest="500"
-                       Padding="30"
-                       CornerRadius="20"
-                       BorderColor="#E1E8FF"
-                       BackgroundColor="White"
-                       HorizontalOptions="Center"
-                       VerticalOptions="Center">
+                <HorizontalStackLayout>
+                    <CheckBox x:Name="AgreementCheckBox"/>
+                    <Label Text="Я согласен с условиями использования" VerticalOptions="Center" TextColor="#244484" FontSize="13"/>
+                </HorizontalStackLayout>
 
-                    <VerticalStackLayout Spacing="10">
-                        <Label Text="Регистрация"
-                               FontSize="26"
-                               FontAttributes="Bold"
-                               TextColor="#244484"
-                               HorizontalOptions="Center"/>
+                <Button x:Name="RegisterButton"
+                        Text="Зарегистрироваться"
+                        Clicked="OnRegisterClicked"
+                        BackgroundColor="#244484"
+                        TextColor="White"
+                        HeightRequest="48"
+                        CornerRadius="12"
+                        FontSize="16"/>
 
-                        <VerticalStackLayout Spacing="3">
-                            <Label Text="Имя" TextColor="#244484" FontAttributes="Bold"/>
-                            <Entry x:Name="FirstNameEntry" Placeholder="Введите имя" TextColor="#244484" BackgroundColor="White"/>
-                        </VerticalStackLayout>
-
-                        <VerticalStackLayout Spacing="3">
-                            <Label Text="Фамилия" TextColor="#244484" FontAttributes="Bold"/>
-                            <Entry x:Name="LastNameEntry" Placeholder="Введите фамилию" TextColor="#244484" BackgroundColor="White"/>
-                        </VerticalStackLayout>
-
-                        <VerticalStackLayout Spacing="3">
-                            <Label Text="Отчество" TextColor="#244484" FontAttributes="Bold"/>
-                            <Entry x:Name="MiddleNameEntry" Placeholder="Введите отчество" TextColor="#244484" BackgroundColor="White"/>
-                        </VerticalStackLayout>
-
-                        <VerticalStackLayout Spacing="3">
-                            <Label Text="Телефон" TextColor="#244484" FontAttributes="Bold"/>
-                            <Entry x:Name="PhoneEntry" Keyboard="Telephone" Placeholder="+7" TextColor="#244484" BackgroundColor="White"/>
-                        </VerticalStackLayout>
-
-                        <VerticalStackLayout Spacing="3">
-                            <Label Text="Email" TextColor="#244484" FontAttributes="Bold"/>
-                            <Entry x:Name="EmailEntry" Keyboard="Email" Placeholder="example@mail.ru" TextColor="#244484" BackgroundColor="White"/>
-                        </VerticalStackLayout>
-
-                        <VerticalStackLayout Spacing="3">
-                            <Label Text="Дата рождения" TextColor="#244484" FontAttributes="Bold"/>
-                            <DatePicker x:Name="BirthDatePicker" Format="dd.MM.yyyy" BackgroundColor="White"/>
-                        </VerticalStackLayout>
-
-                        <VerticalStackLayout Spacing="3">
-                            <Label Text="Пароль" TextColor="#244484" FontAttributes="Bold"/>
-                            <Entry x:Name="PasswordEntry" IsPassword="True" Placeholder="Пароль" TextColor="#244484" BackgroundColor="White"/>
-                        </VerticalStackLayout>
-
-                        <VerticalStackLayout Spacing="3">
-                            <Label Text="Подтверждение пароля" TextColor="#244484" FontAttributes="Bold"/>
-                            <Entry x:Name="ConfirmPasswordEntry" IsPassword="True" Placeholder="Повторите пароль" TextColor="#244484" BackgroundColor="White"/>
-                        </VerticalStackLayout>
-
-                        <HorizontalStackLayout>
-                            <CheckBox x:Name="AgreementCheckBox"/>
-                            <Label Text="Я согласен с условиями использования" VerticalOptions="Center" TextColor="#244484"/>
-                        </HorizontalStackLayout>
-
-                        <Button x:Name="RegisterButton"
-                                Text="Зарегистрироваться"
-                                Clicked="OnRegisterClicked"
-                                BackgroundColor="#244484"
-                                TextColor="White"
-                                HeightRequest="50"
-                                CornerRadius="12"/>
-
-                        <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
-                            <Label Text="Уже есть аккаунт?" TextColor="#828CA0" VerticalOptions="Center"/>
-                            <Label Text="Войти" TextColor="#467EEA">
-                                <Label.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnLoginTapped"/>
-                                </Label.GestureRecognizers>
-                            </Label>
-                        </HorizontalStackLayout>
-                    </VerticalStackLayout>
-
-                </Frame>
-            </Grid>
-        </ScrollView>
-    </Grid>
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
+                    <Label Text="Уже есть аккаунт?" TextColor="#828CA0" VerticalOptions="Center" FontSize="14"/>
+                    <Label Text="Войти" TextColor="#467EEA" FontSize="14">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnLoginTapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Border>
+    </ScrollView>
 </ContentPage>

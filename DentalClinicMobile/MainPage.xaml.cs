@@ -134,43 +134,20 @@ namespace DentalClinicMobile
         {
             HideSearchResults();
             SearchEntry.Text = "";
-            await Navigation.PushAsync(new ServiceInfoPage(service.Id));
-        }
-
-        private async void OnHomeTapped(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new MainPage());
-        }
-
-        private async void OnAboutTapped(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new AboutPage());
+            await Shell.Current.GoToAsync($"ServiceInfoPage?serviceId={service.Id}");
         }
 
         private async void OnServicesTapped(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new ServicesPage());
-        }
-
-        private async void OnPriceTapped(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new PricePage());
-        }
-
-        private async void OnProfileTapped(object sender, EventArgs e)
-        {
-            if (AuthManager.IsAuthenticated || AuthManager.GetCurrentUserId().HasValue)
-                await Navigation.PushAsync(new ProfilePage());
-            else
-                await Navigation.PushAsync(new LoginPage());
+            await Shell.Current.GoToAsync("//ServicesPage");
         }
 
         private async void OnMakeAppointmentClicked(object sender, EventArgs e)
         {
             if (AuthManager.IsAuthenticated || AuthManager.GetCurrentUserId().HasValue)
-                await Navigation.PushAsync(new AppointmentPage());
+                await Shell.Current.GoToAsync("AppointmentPage");
             else
-                await Navigation.PushAsync(new LoginPage());
+                await Shell.Current.GoToAsync("LoginPage");
         }
 
         private async void OnAddressClicked(object sender, EventArgs e)

@@ -32,49 +32,49 @@ namespace DentalClinicMobile
                 if (string.IsNullOrWhiteSpace(firstName) || string.IsNullOrWhiteSpace(lastName) ||
                     string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
                 {
-                    await DisplayAlert("Ошибка", "Заполните все обязательные поля (Имя, Фамилия, Email, Пароль)", "OK");
+                    await DisplayAlert("РћС€РёР±РєР°", "Р—Р°РїРѕР»РЅРёС‚Рµ РІСЃРµ РѕР±СЏР·Р°С‚РµР»СЊРЅС‹Рµ РїРѕР»СЏ (РРјСЏ, Р¤Р°РјРёР»РёСЏ, Email, РџР°СЂРѕР»СЊ)", "OK");
                     return;
                 }
 
                 if (!agreement)
                 {
-                    await DisplayAlert("Ошибка", "Необходимо согласие с условиями использования", "OK");
+                    await DisplayAlert("РћС€РёР±РєР°","РџСЂРёРјРёС‚Рµ СЃРѕРіР»Р°СЃРёРµ СЃ СѓСЃР»РѕРІРёСЏРјРё РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ", "OK");
                     return;
                 }
 
                 if (password != confirmPassword)
                 {
-                    await DisplayAlert("Ошибка", "Пароли не совпадают", "OK");
+                    await DisplayAlert("РћС€РёР±РєР°", "РџР°СЂРѕР»Рё РЅРµ СЃРѕРІРїР°РґР°СЋС‚", "OK");
                     return;
                 }
 
                 if (password.Length < 6)
                 {
-                    await DisplayAlert("Ошибка", "Пароль должен содержать минимум 6 символов", "OK");
+                    await DisplayAlert("РћС€РёР±РєР°", "РџР°СЂРѕР»СЊ РґРѕР»Р¶РµРЅ СЃРѕРґРµСЂР¶Р°С‚СЊ РјРёРЅРёРјСѓРј 6 СЃРёРјРІРѕР»РѕРІ", "OK");
                     return;
                 }
 
                 if (!IsValidEmail(email))
                 {
-                    await DisplayAlert("Ошибка", "Введите корректный email", "OK");
+                    await DisplayAlert("РћС€РёР±РєР°", "Р’РІРµРґРёС‚Рµ РєРѕСЂСЂРµРєС‚РЅС‹Р№ email", "OK");
                     return;
                 }
 
                 if (birthDate == null || birthDate.Value == DateTime.MinValue)
                 {
-                    await DisplayAlert("Ошибка", "Укажите дату рождения", "OK");
+                    await DisplayAlert("РћС€РёР±РєР°", "Р’С‹Р±РµСЂРёС‚Рµ РґР°С‚Сѓ СЂРѕР¶РґРµРЅРёСЏ", "OK");
                     return;
                 }
 
                 if (birthDate.Value > DateTime.Today)
                 {
-                    await DisplayAlert("Ошибка", "Дата рождения не может быть в будущем", "OK");
+                    await DisplayAlert("РћС€РёР±РєР°", "Р”Р°С‚Р° СЂРѕР¶РґРµРЅРёСЏ РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РІ Р±СѓРґСѓС‰РµРј", "OK");
                     return;
                 }
 
                 if (await _databaseService.CheckEmailExistsAsync(email))
                 {
-                    await DisplayAlert("Ошибка", "Пользователь с таким email уже существует", "OK");
+                    await DisplayAlert("РћС€РёР±РєР°", "РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ СЃ С‚Р°РєРёРј email СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚", "OK");
                     return;
                 }
 
@@ -83,23 +83,23 @@ namespace DentalClinicMobile
 
                 if (userId.HasValue && userId.Value > 0)
                 {
-                    await DisplayAlert("Успех", "Регистрация прошла успешно!", "OK");
-                    await Navigation.PushAsync(new LoginPage());
+                    await DisplayAlert("РЈСЃРїРµС…", "Р РµРіРёСЃС‚СЂР°С†РёСЏ РїСЂРѕС€Р»Р° СѓСЃРїРµС€РЅРѕ!", "OK");
+                    await Shell.Current.GoToAsync("..");
                 }
                 else
                 {
-                    await DisplayAlert("Ошибка", "Ошибка при регистрации пользователя", "OK");
+                    await DisplayAlert("РћС€РёР±РєР°", "РћС€РёР±РєР° РїСЂРё СЂРµРіРёСЃС‚СЂР°С†РёРё РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ", "OK");
                 }
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Ошибка", $"Ошибка: {ex.Message}", "OK");
+                await DisplayAlert("РћС€РёР±РєР°", $"РћС€РёР±РєР°: {ex.Message}", "OK");
             }
         }
 
         private async void OnLoginTapped(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new LoginPage());
+            await Shell.Current.GoToAsync("..");
         }
 
         private bool IsValidEmail(string email)
@@ -114,34 +114,6 @@ namespace DentalClinicMobile
             {
                 return false;
             }
-        }
-
-        private async void OnHomeTapped(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new MainPage());
-        }
-
-        private async void OnAboutTapped(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new AboutPage());
-        }
-
-        private async void OnServicesTapped(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new ServicesPage());
-        }
-
-        private async void OnPriceTapped(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new PricePage());
-        }
-
-        private async void OnProfileTapped(object sender, EventArgs e)
-        {
-            if (AuthManager.IsAuthenticated || AuthManager.GetCurrentUserId().HasValue)
-                await Navigation.PushAsync(new ProfilePage());
-            else
-                await Navigation.PushAsync(new LoginPage());
         }
     }
 }
